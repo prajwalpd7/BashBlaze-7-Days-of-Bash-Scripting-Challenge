@@ -2,6 +2,7 @@
 
 > Learn X in Y minutes
 > Where X=bash
+<img src="https://github.com/prajwalpd7/BashBlaze-7-Days-of-Bash-Scripting-Challenge/assets/71492927/0b952f89-187d-4d34-b174-8f918ccb5783" alt="Image" width="350" height="350">
 
 ## About the Challenge
 
