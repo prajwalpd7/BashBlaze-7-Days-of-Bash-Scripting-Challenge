@@ -1,33 +1,3 @@
-ubuntu@ip-172-31-23-12:~/challenge/BashBlaze-7-Days-of-Bash-Scripting-Challenge$ vim day1.sh 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #!/bin/bash
 
 # The first line above is called shebang "#!", this tells the kernal which interpreter should be used to run the commands present in the file. In this case the kernel will execute /bin/bash day1.sh
@@ -110,17 +80,4 @@ ls *.md
 #-----------------------------------------------------------------------------------------------------------------
 
 #Give read, write and execution permission to user for the file using below command.
-# sudo chmod 700 day1.sh
-~                                                                                                                                                                                        
-~                                                                                                                                                                                        
-~                                                                                                                                                                                        
-~                                                                                                                                                                                        
-~                                                                                                                                                                                        
-~                                                                                                                                                                                        
-~                                                                                                                                                                                        
-~                                                                                                                                                                                        
-~                                                                                                                                                                                        
-~                                                                                                                                                                                        
-~                                                                                                                                                                                        
-                                                                                                                                                                       59,1          All
-
+# sudo chmod 700 day1.sh 
