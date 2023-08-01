@@ -24,4 +24,4 @@ echo $#
 echo $HOME
 
 #finding file name in home directoy and it's subdirectory with .jpg extension
-#find /home -name "*.jpg"
+find /home -name "*.jpg"
