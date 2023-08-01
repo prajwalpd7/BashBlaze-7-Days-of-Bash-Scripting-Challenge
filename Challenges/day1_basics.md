@@ -31,3 +31,4 @@ Create a single bash script that completes all the Tasks mentioned above. Add co
 To submit your entry, create a GitHub repository and commit your script to it.
 
 Good luck with Day 1 of the Bash Scripting Challenge! Tomorrow, the difficulty will increase as we move on to more advanced concepts. Happy scripting!
+
