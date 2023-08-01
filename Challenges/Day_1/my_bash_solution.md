@@ -1,10 +1,10 @@
-## ** Introduction: **
+## **Introduction:**
 
 Bash scripting is a powerful and versatile skill that allows you to automate tasks and perform complex operations using the command-line interface of a Unix-based operating system, such as Linux or macOS. Bash which stands for "Bourne Again Shell" is the default shell for many Unix-like systems and serves as a command interpreter for executing commands and scripts.
 
 Today we are going to cover the basics of Bash scripting. By the end of this challenge, we will be able to improve our understanding of bash scripting and will be able to create a bash script for the respective requirements. So, let's begin!
 
-## ** Task 1: Comments **
+## **Task 1: Comments**
 
 In bash scripts, comments are the non-executed part of the script. They provide useful information or explanations about the code. They play an important role in making the script more understandable not only for the author but also for the developers who might need to work with the script.
 
@@ -33,7 +33,7 @@ echo "This line will not be executed."
 echo "Hello World!"
 ```
 
-## ** Task 2: Echo **
+## **Task 2: Echo**
 
 In bash, an `echo` command is a command used to output or display messages on the terminal. It is one of the most commonly used commands in bash script. Now let's create a bash script to print a message using `echo` command.
 
@@ -45,7 +45,7 @@ In bash, an `echo` command is a command used to output or display messages on th
 echo "Let's explore the world of bash scripting!"
 ```
 
-## ** Task 3: Variables **
+## **Task 3: Variables**
 
 In bash, variables are used to store data and values that can be referenced and manipulated throughout the script. They are a fundamental part of shell scripting and allow you to store temporary or permanent data. In this task, we will create a bash script that declares variables and assigns value to them. Here's how you declare and use variables in bash:
 
@@ -61,7 +61,7 @@ echo "My name is $name"
 echo "And my favourite book is $book"
 ```
 
-## ** Task 4: Using Variables **
+## **Task 4: Using Variables**
 
 In the previous task, we declared the variables. In this task, we will now make use of them to perform the given task. So we'll simply create two variables of type number and then print their sum.
 
@@ -82,7 +82,7 @@ result=$((num1 + num2))
 echo "The sum of two given numbers is: $result"
 ```
 
-## ** Task 5: Using Built-in Variables **
+## **Task 5: Using Built-in Variables**
 
 Built-in variables are the special variables whose values are defined and maintained by the bash or the operating system. These variables are predefined and have specific names that are recognized by the shell. In this task, we will create a bash script that utilizes at least three different built-in variables to display relevant information.
 
@@ -108,7 +108,7 @@ echo "Host name: $HOSTNAME"
 echo "Operating system type: $OSTYPE"
 ```
 
-## ** Task 6: Wildcards **
+## **Task 6: Wildcards**
 
 Wildcards are special characters used to represent and match one or more filenames or paths. They are powerful tools that allow you to perform operations on multiple files or directories at once. In this task, we will create a bash script that utilizes wildcards to list all the files with a specific extension in a directory.
 
