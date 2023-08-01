@@ -32,9 +32,8 @@ done
 #Infinite loop to input the text.
 while true
 do
-    echo -n "Enter a line of text (Press Enter without text to exit): "
     #Takes user input and store it in variable.
-    read inp_text
+    read -p "Enter a line of text (Press Enter without text to exit): " inp_text
     #Exits program if the input is empty.
     if [[ $inp_text == "" ]]; then 
         echo "Exiting"
