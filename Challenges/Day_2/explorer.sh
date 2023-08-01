@@ -1,10 +1,9 @@
-#!/bin/bash
-
 #Author : Apurv Samadder
 #Date : Aug 1 2023
 #Version: v1
 #Day 2 Bash Scripting Challenge - Interactive File and Directory Explorer #TWS
 
+#!/bin/bash
 
 #This is just echo the printed message on screen
 echo "Welcome to the Interactive File and Directory Explorer!"
