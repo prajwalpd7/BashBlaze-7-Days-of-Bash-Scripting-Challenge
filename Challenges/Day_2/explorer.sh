@@ -2,6 +2,8 @@
 
 # Part 1: File and Directory Exploration
 
+# AUTHOR : SONAL SINGH
+
 # Welcome message
 echo "Welcome to the Explorer!"
 echo "This script will list all files and directories in the current path."
@@ -18,8 +20,7 @@ echo "--------------------------------------------------------------------------
 echo "Files and Directories in the current path with their sizes:"
 ls -lh
 
-#!/bin/bash
-
+# The list of files and directories will be displayed in a loop until the user decides to exit the explorer.
 while true; do
     echo "Enter the directory path (or 'exit' to quit):"
     read directory
@@ -42,3 +43,18 @@ while true; do
     echo "---------------------------------"
 done
 
+# Part 2: Character Counting
+
+echo "Enter text (press Enter on an empty line to exit):"
+
+while true; do
+    read line
+
+    if [ -z "$line" ]; then
+        echo "Exiting the character counter."
+        break
+    fi
+
+    character_count=${#line}
+    echo "Number of characters in the line: $character_count"
+done
