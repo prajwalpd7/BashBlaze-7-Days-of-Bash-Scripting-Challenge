@@ -7,6 +7,7 @@ echo "Welcome to the interactive File and Directory explorer"
 #Displays Files and Directories in the current directory
 
 echo "These are the files and directories in the current folder."
+echo "The current directory is $PWD"
 echo "The files will be displayed in a loop. To exit the Directory explorer press q and enter"
 echo -e "\n"
 echo -e "Note: The files ending with '/' are directories \n"
