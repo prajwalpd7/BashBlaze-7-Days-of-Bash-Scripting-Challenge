@@ -1,7 +1,7 @@
-please run 'day2.0_challange_solution.sh'
+please run 'day2.0_challange_solution.sh' and day2.1_challange_solution.sh
 
 
-sample output for this script:
+sample output for the script day2.0_challange_solution.sh:
 
 ~/BashBlaze-7-Days-of-Bash-Scripting-Challenge/Self-solutions/Day_2# ./day2.0_challange_solution.sh
 
@@ -33,3 +33,15 @@ Files and Directories in the Current Path:
 
 Enter a line of text (Press Enter without text to exit):
 Exiting the Interactive Explorer. Goodbye!
+
+
+sample output for the script day2.1_challange_solution.sh
+root@ip-172-31-91-38:~/BashBlaze-7-Days-of-Bash-Scripting-Challenge/Self-solutions/Day_2# ./day2.1_challange_solution.sh /root/backup_directory/
+Backup created: /root/backup_directory//backup_20230801124651.tar.gz
+root@ip-172-31-91-38:~/BashBlaze-7-Days-of-Bash-Scripting-Challenge/Self-solutions/Day_2# ./day2.1_challange_solution.sh /root/backup_directory/
+Backup created: /root/backup_directory//backup_20230801124655.tar.gz
+root@ip-172-31-91-38:~/BashBlaze-7-Days-of-Bash-Scripting-Challenge/Self-solutions/Day_2# ./day2.1_challange_solution.sh /root/backup_directory/
+Backup created: /root/backup_directory//backup_20230801124656.tar.gz
+root@ip-172-31-91-38:~/BashBlaze-7-Days-of-Bash-Scripting-Challenge/Self-solutions/Day_2# ./day2.1_challange_solution.sh /root/backup_directory/
+Removed the oldest file: backup_20230801124651.tar.gz
+Backup created: /root/backup_directory//backup_20230801124657.tar.gz
