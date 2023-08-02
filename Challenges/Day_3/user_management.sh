@@ -64,8 +64,8 @@ resetPassword() {
 }
 
 listUsers() {
-	# Lists down the users along with their UIDs taken from /etc/passwd file
-	awk  'BEGIN{FS=":"}{print $1 " (UID: " $3 ")"}' /etc/passwd
+	# Lists down the users, UIDs, Home Directory, and default shell
+	awk -F":" 'BEGIN{print "USER" " " "UID" " " "HOME" " " "SHELL"}{print $1,$3,$6,$7}' /etc/passwd | column -t
 }
 
 showHelp() {
