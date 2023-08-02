@@ -1,0 +1,30 @@
+#!/bin/bash
+# It Says to use bash interpreter while running the Script.
+
+# Task  2: Echo strings in Bash Outputs
+echo "This is Print of Sentence Written in the Bash"
+
+# Task  3: Declaring New Variables
+Name1="Ravi"
+Name2="Kyada"
+Country=India
+Position='DevOps Engineer'
+
+# Task  4: Using Variables you can Create Amazing Sentences!!!
+Name="$Name1, $Name2!"
+echo Hi This is $Name, Working As $Position In $Country!
+
+# Task  5: Using Built-in Variables
+echo "Home Directory where the Script Running  is - $HOME"
+echo "Current Working Directory - $PWD"
+echo "Current Hostname is - $HOSTNAME" #Output May Vary on Your Working Host.
+echo "This script's name: $0"
+echo "Number of arguments passed: $#"
+echo "Process ID of the script is: $$"
+echo "Current Timing is: `date`" #Use Hotbar Keys Here.
+echo "Current Executing Line of $LINENO" #Use BASH_LINENO if this not working on Your Bash.
+
+# Task  6: USse Wildcards in Bash
+DIR="/home/user/Downloads"
+echo "List of .sh files in the directory $DIR:"
+cd $DIR && ls *.sh
