@@ -76,8 +76,105 @@ showHelp() {
 	echo "-d, --delete    Delete a user account (requires sudo permission)"
 	echo "-r, --reset     Reset an existing user's password (requires sudo permission)"
 	echo "-l, --list      List all user accounts present in the system."
+	echo "-u, --update    Update user account"
 	echo "-h, --help      Display help page"
 
+}
+
+updateUser() {
+	echo "----- User Modification Menu -----"
+    	echo "1. Change user's login name"
+    	echo "2. Change user's home directory"
+    	echo "3. Change user's default shell"
+	echo "4. Lock user account"
+	echo "5. Unlock user account"
+	echo "6. Change UID of user"
+    	echo "7. Exit"
+	read -p "Choose option:" option
+	case $option in
+		7)
+			exit;;
+		1)
+			read -p "Enter your old username:" username
+			if ! usernameExists $username; then
+				echo "$username user does not exits"
+				exit 1
+			fi
+			read -p "Enter your new username:" newUsername
+			sudo usermod -l $newUsername $username
+			if [[ $? -ne 0 ]];then
+				echo "An error occurred while trying to change login name"
+				exit 1
+			else
+				echo "username changed from $username to $newUsername"
+			fi
+			;;
+		2)
+			read -p "Enter your username:" username
+                        if ! usernameExists $username; then
+                                echo "$username user does not exits"
+                                exit 1
+                        fi
+			read -p "Enter path of new home directory:" homedirectory
+			sudo usermod -m -d "$homedirectory" "$username"
+			;;
+		3)
+            		read -p "Enter the username:" username
+			if ! usernameExists $username; then
+                                echo "$username user does not exits"
+                                exit 1
+                        fi
+            		read -p "Enter new shell path:" newShell
+			if [[ ! -f $newShell  ]]; then
+				echo "Shell not found in path, please provide a valid shell path"
+				exit 1
+			fi
+			sudo usermod -s "$newShell" "$username"
+			if [[ $? -ne 0 ]];then
+				echo "An error occurred while changing default shell of $username"
+				exit 1
+			else
+				echo "Default shell of $username changed successfully to $newShell"
+			fi
+			;;
+		4)
+			read -p "Enter the username:" username
+			if ! usernameExists $username; then
+                                echo "$username user does not exits"
+                                exit 1
+                        fi
+			sudo usermod -L "$username"
+			if [[ $? -ne 0 ]];then
+                                echo "An error occurred while locking the account of $username"
+                                exit 1
+                        else
+                                echo "Account locked successfully"
+                        fi
+			;;
+		5)
+		       read -p "Enter the username:" username
+                        if ! usernameExists $username; then
+                                echo "$username user does not exits"
+                                exit 1
+                        fi
+                        sudo usermod -U "$username"
+                        if [[ $? -ne 0 ]];then
+                                echo "An error occurred while unlocking the account of $username"
+                                exit 1
+                        else
+                                echo "Account unlocked successfully"
+                        fi
+                        ;;
+		6)
+			read -p "Enter the username:" username
+                        if ! usernameExists $username; then
+                                echo "$username user does not exits"
+                                exit 1
+                        fi
+			read -p "Enter new UID:" uid
+			sudo usermod -u "$uid" "$username"
+			;;
+	esac
 }
 
 
@@ -98,6 +195,9 @@ case $OPTION in
 	-h | --help)
 		showHelp
 		exit;;
+	-u | --update)
+		updateUser
+		;;
 	*)
 		echo "Invalid option. Check the help page for valid options"
 		;;
