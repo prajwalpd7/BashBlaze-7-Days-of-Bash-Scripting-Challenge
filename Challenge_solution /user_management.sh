@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Account Creation - It allows the script to create a new user account.
+
 create_user() {
     echo "Welcome to the user creation script."
     read -p "Enter the new username: " username
@@ -19,6 +21,8 @@ create_user() {
     echo "User account '$username' created successfully."
 }
 
+# Account Deletion - It allows the script to delete an existing user account.
+
 delete_user() {
     echo "Welcome to the user deletion script."
     read -p "Enter the username to delete: " username
@@ -33,6 +37,8 @@ delete_user() {
 
     echo "User account '$username' deleted successfully."
 }
+
+# Password Reset - It allows the script to reset the password of an existing user account.
 
 reset_password() {
     echo "Welcome to the password reset script."
@@ -52,10 +58,14 @@ reset_password() {
     echo "Password for user '$username' reset successfully."
 }
 
+# List User Accounts - It allows the script to list all user accounts on the system
+
 list_users() {
     echo "List of user accounts:"
     awk -F: '{ print "Username:", $1, "UID:", $3 }' /etc/passwd
 }
+
+# Help and Usage Information - It displays usage information and the available command-line options for the script.
 
 display_usage() {
     echo "Usage: $0 [-c|--create] [-d|--delete] [-r|--reset] [-l|--list] [-h|--help]"
