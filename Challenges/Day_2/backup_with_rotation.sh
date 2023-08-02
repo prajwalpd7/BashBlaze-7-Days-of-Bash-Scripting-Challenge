@@ -16,7 +16,7 @@
 # As per requirement we need to take "directory path as a command-line argument" for that we use positional argument feature of shell, where the first argument is recognized as $1 and same has been 
 #assigned to src_dir variable in program
 
-# Creating backup folder as this is a kind of bug, it should get creatd automaticallt , however its throwing as error if below mkdir is not executed
+# Creating backup folder using below command -p option will check if the folder exist it will skip and in case if backup folder is not there it will create it first
 
 mkdir -p /home/f5617049/Documents/BashBlaze-7-Days-of-Bash-Scripting-Challenge/Challenges/backups
 
