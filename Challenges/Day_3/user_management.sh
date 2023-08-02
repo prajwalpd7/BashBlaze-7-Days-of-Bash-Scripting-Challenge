@@ -82,7 +82,7 @@ case "$1" in
 	"-h")
                 help
                 ;;
-	"-help")
+	"--help")
                 help
                 ;;
 	"--create")
@@ -111,6 +111,8 @@ case "$1" in
                 list
                 ;;
 	*)
+ 	echo "This is not a valid option. Please check usage of this script below -" 
+  	help
 		;;
 esac
 
