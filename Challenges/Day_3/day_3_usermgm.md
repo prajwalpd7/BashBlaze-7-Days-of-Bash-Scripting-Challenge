@@ -43,6 +43,9 @@ If you want to challenge yourself further, you can add additional features to th
 
 Remember to handle errors gracefully, provide appropriate user prompts, and add comments to explain the logic and purpose of each part of the script.
 
+## [Example Interaction: User Account Management Script](./example_interaction_with_usr_acc_mgmt.md)
+
+
 ## Submission Instructions
 
 Create a bash script named `user_management.sh` that implements the User Account Management as described in the challenge.
