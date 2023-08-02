@@ -18,7 +18,7 @@
 
 # Creating backup folder as this is a kind of bug, it should get creatd automaticallt , however its throwing as error if below mkdir is not executed
 
-# mkdir /home/f5617049/Documents/BashBlaze-7-Days-of-Bash-Scripting-Challenge/Challenges/backups
+mkdir -p /home/f5617049/Documents/BashBlaze-7-Days-of-Bash-Scripting-Challenge/Challenges/backups
 
 src_dir=$1
 
