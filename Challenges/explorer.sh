@@ -4,7 +4,7 @@
 # Author : Gurudeo ray                                                                       #
 ##############################################################################################
 #                                                                                            #
-# Usage : Created this script to full fill Day 2 Bashblaze challenge  (Interactive File and  # 
+# About : Developed a script to full fill Day 2 Bashblaze challenge  (Interactive File and   # 
 #         Directory Explorer)                                                                #
 #                                                                                            #
 ##############################################################################################
