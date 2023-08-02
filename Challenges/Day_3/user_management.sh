@@ -65,6 +65,12 @@ function listUsers(){
     awk -F':' '{ print $1" (User ID: "$3")"}' /etc/passwd
 }
 
+#Function to list of all system users and additional details
+function listUsersDetailed(){
+    echo "Listing Users in System and Additional details"
+    awk -F':' '{ print $1" (User ID: "$3") (Home Directory: "$6") (bash: "$7")"}' /etc/passwd
+}
+
 #Function to display help
 function help(){
     echo "Usage ./user_management.sh [options]"
@@ -77,7 +83,7 @@ function help(){
 
 }
 
-VALID_ARGS=$(getopt -o cdrlh --long create,delete,reset,list,help -- "$@")
+VALID_ARGS=$(getopt -o cdrlhu --long create,delete,reset,list,help,list_detailed -- "$@")
 
 # Check for argument provided
 if [[ $1 == "" ]]; then
@@ -108,6 +114,10 @@ while [ : ]; do
 
         -h | --help)
             help
+            shift;;
+        
+        -u | --list_detailed)
+            listUsersDetailed
             shift;;
 
         --)shift;
