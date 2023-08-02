@@ -137,6 +137,7 @@ elif [ "$1" == "-d" ] || [ "$1" == "--delete" ]
         echo "Sorry, The username '$username' doesn't exist.Please enter a valid username"
 
     fi
+    
 # Reset password for a user account
 
 elif [ "$1" == "-r" ] || [ "$1" == "--reset" ]
