@@ -73,8 +73,6 @@ echo "   -mu, --modusername Modify username for an existing user account"
 echo "   -muid, --moduserid Modify user ID for an existing user account"
 echo "   -mh,   --modhome  Modify home directory for an existing user account "
 echo "   -ms,   --modshell  Modify default shell for an existing user account"
-echo
-echo "############## Below options are for the future implementation ##############################"
 echo "   -mg,   --modgroup  Modify group for an existing user account "
 echo "   -mpa,  --modpassage Modify password expiration date for an existing user account"
 echo "   -mas,  --modaccstatus Modfiy account status(Lock/Unlock) for an existing user account"
@@ -163,7 +161,7 @@ elif [ "$userOption" == "-h"  ] || [ "$userOption" == "--help"  ]; then
 	displayUserOptions #displaying the user options for help option.
 
 
-#From here is for the bonus learning
+#From here is for the bonus features!!
 elif [ "$userOption" == "-ui"  ] || [ "$userOption" == "--userinfo"  ]; then
 
 	read -p "Enter username to know more information about the user account: " usernameByUser
@@ -229,7 +227,8 @@ elif [ "$userOption" == "-mh"  ] || [ "$userOption" == "--modhome"  ]; then   #t
 												
                 echo "Default user home directory for user $usernameByUser is: $oldHomeDirectory"
                 read -p "Enter new user home directory that you wanted to modify for user $usernameByUser:  " newUserHomeDirByUser
-                sudo usermod -d "$newUserHomeDirByUser" "$usernameByUser"     # using -d option with usermod command to modify the default home directory.
+                sudo usermod -d "$newUserHomeDirByUser" -m "$usernameByUser"     # using -d option with usermod command to modify the default home directory.
+										 #-m: moving all the files there in old directory to new directory.
                 echo "Successfully Updated the home directory for user $usernameByUser from $oldHomeDirectory to $newUserHomeDirByUser ! "
         else
                 echo "user $usernameByUser is not existed, so please choose an existed user to modify it's user default home directory !"
@@ -251,29 +250,88 @@ elif [ "$userOption" == "-ms"  ] || [ "$userOption" == "--modshell"  ]; then  ##
                 echo "Default Shell for user $usernameByUser is: $oldShell"
                 read -p "Enter new shell path that you wanted to modify for user $usernameByUser:  " newShell
                 sudo usermod -s "$newShell" "$usernameByUser"
-                echo "Successfully Updated the new Shel for user $usernameByUser from $oldShell to $newShell ! "
+                echo "Successfully Updated the new Shell for user $usernameByUser from $oldShell to $newShell ! "
         else
                 echo "user $usernameByUser is not existed, so please choose an existed user to modify it's user default shell !"
         fi
 
 
+elif [ "$userOption" == "-mg"  ] || [ "$userOption" == "--modgroup"  ]; then  ##this is for modification user group of an user
+
+        read -p "Enter username that you wanted to modify it's group:  " usernameByUser
+
+        is_user_exists "$usernameByUser"
+
+        if [ $? -eq 0  ]; then
+		oldGroup=$(id -gn $usernameByUser) #-g: Display the numeric group ID (GID) of the user.
+						   #-n: Display the name of the user or group.
+						   # using -gn, combines both options, and the command will display the name of the primary group associated with the user.
+                echo "Existed group name for user $usernameByUser is: $oldGroup"
+                read -p "Enter group name that you wanted to modify for user $usernameByUser:  " newGroup
+                
+		if grep -q "^$newGroup:" /etc/group; then  #checking if provided group name is exists or not in /etc/group file and add the username to group.
+			sudo usermod -aG $newGroup $usernameByUser  #using -aG option with usermod command to add the specified group to the user.
+								    #-a: This option tells the usermod command to append the user to the specified group(s) without r										removing them from any other groups.
+								    #-G: This option specifies the list of supplementary groups to which the user should be added. Mu								ltiple group names can be provided, separated by commas, to add the user to multiple groups at once.
+                echo "Successfully Updated the new group for user $usernameByUser from $oldGroup to $newGroup ! "
+		else
+			echo "mentioned group is not present in system , please provided the existed group name !"
+        	fi
+	else
+                echo "user $usernameByUser is not existed, so please choose an existed user to modify it's group name !"
+        fi
+
+
+elif [ "$userOption" == "-mpa"  ] || [ "$userOption" == "--modpassage"  ]; then  #this is for modification of password expiration date for user account.
+
+        read -p "Enter username that you wanted to add a account password expiration date: " usernameByUser
+
+        is_user_exists "$usernameByUser"
+
+        if [ $? -eq 0  ]; then
+                read -p "Enter how many number of days password will expire for user $usernameByUser:  " passExpireDays #taking password expiry in days as a input
+                passwd -x "$passExpireDays" "$usernameByUser" 	#The passwd command is used to set or change a user's password in Linux
+								#The -x option is used to set the maximum number of days a password can be used before it expires.
+
+                echo "Successfully Updated the password expiry for user $usernameByUser ! "
+		echo
+		echo "Now the password expiry date information as follows..."
+		chage -l $usernameByUser      #The chage command in Linux is used to manage user password aging information. It allows you to view and modify passwor						    d expiration.
+					      #The -l option is used with the chage command to display the password aging information for a user account
+        else
+                echo "user $usernameByUser is not existed, so please choose an existed user to modify it's password expiry !"
+        fi
+
+
+elif [ "$userOption" == "-mas"  ] || [ "$userOption" == "--modaccstatus"  ]; then  #this is for locking/unlocking the user account.
+
+        read -p "Enter username that you wanted to Lock/Unlock:  " usernameByUser
+
+        is_user_exists "$usernameByUser"
+
+        if [ $? -eq 0  ]; then
+		echo "Enter your choice 1 or 2: "
+		echo "choose 1 to Lock the user account"
+		echo "choose 2 to unlock the user account"
+		read accountStatusByUser
+		if [ $accountStatusByUser == 1 ]; then
+			usermod -L $usernameByUser 	#-L option is to lock the useraccount with usermod command.
+			echo "user account $usernameByUser is locked successfully !"
+		elif [ $accountStatusByUser == 2  ]; then
+			usermod -U $usernameByUser      #-U option is to unlock the useraccount with usermod command.
+			echo "user account $usernameByUser is unlocked successfully !"
+		else
+			echo "Please enter the valid option !"
+		
+		#To view the user account status whether it is locked or not we can use: passwd -S "$username"
+		fi		
+	else
+                echo "user $usernameByUser is not existed, so please choose an existed user to Lock/Unlock !"
+        fi
 
 else  #if user enters any different option prompting the user to provide correct option.
         echo "Invalid option, Please enter the correct user option!"
 fi
 
-##############################################Future implementation plan for more user modification###############################
-#pla-1
-#input the group name(s) and add the user to the group.
-#usermod -G sudo,ftp username
 
-#plan-2
-#input the date as same as format(2023-12-31) to set password expiration prefereably 90days and it will automatically send warning before expring the password in 7days using -w 7 as below.
-#usermod -e 2023-12-31 -w 7 username
-
-#plan-3
-#take input option to (lock use -L) and (-U for unlock) the user account
-#usermod -L username
-
-###################################################################################################################
 

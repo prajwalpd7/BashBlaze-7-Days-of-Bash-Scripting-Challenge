@@ -718,4 +718,120 @@ user_id=$(id -u "$username")
 echo "User ID for $username: $user_id"
 
 
+#practice-17
+#To find out the primary group of a user in shell scripting, 
+#use the id command along with the -gn option. 
+#!/bin/bash
+
+# Replace 'username' with the actual username you want to check
+username="username"
+
+# Get the primary group name of the user
+group_name=$(id -gn $username)
+
+echo "The primary group of $username is: $group_name"
+#In the id command, the -gn option is used to display the group name of a user.
+#-g: Display the numeric group ID (GID) of the user.
+#-n: Display the name of the user or group.
+
+
+#practice-18
+#To check if a group exists before adding a user to it in shell scripting, 
+#use the grep command to search for the group in the /etc/group file.
+#!/bin/bash
+
+group_name="developers"
+user_name="john"
+
+# Check if the group exists
+if grep -q "^$group_name:" /etc/group; then
+    echo "Group $group_name exists."
+    # Add the user to the group
+    usermod -aG "$group_name" "$user_name"
+    echo "User $user_name added to group $group_name."
+else
+    echo "Group $group_name does not exist."
+fi
+#In the shell script provided above, the -aG options are used with the usermod command to add a user to a group
+#a: This option tells the usermod command to append the user to the specified group(s) without removing them from any other groups.
+#-G: This option specifies the list of supplementary groups to which the user should be added. Multiple group names can be provided, separated by commas, to add the user to multiple groups at once.
+#In the script, the line usermod -aG "$group_name" "$user_name" is used to add the user specified by $user_name to the group specified by $group_name without affecting their membership in any other groups.
+
+
+#practice-19
+#To check the expiration date of a user account password in shell scripting,
+#use the chage command with the -l option. The chage command is used to change user password expiry information, and the -l option displays the current password expiry details for the user.
+#!/bin/bash
+
+# Provide the username whose password expiry information you want to check
+username="your_username"
+
+# Get the password expiry information using chage -l command
+password_expiry_info=$(chage -l "$username" 2>/dev/null)
+
+# Check if the password expiry information is available
+if [ -n "$password_expiry_info" ]; then
+    echo "Password Expiry Information for User: $username"
+    echo "$password_expiry_info"
+else
+    echo "User $username does not exist or password expiry information is not available."
+fi
+
+#practice-20
+#checking command to set the password expiration for a user:
+passwd -x <max_days> <username>
+#ex:passwd -x 30 john
+#The passwd command is used to set or change a user's password in Linux. The -x option is used to set the maximum number of days a password can be used before it expires.
+#When you run the passwd command with the -x option and a number (e.g., passwd -x 30 john), it means that you are setting the password expiration policy for the user "john" to 30 days. This means that after 30 days, the user "john" will be required to change their password.
+
+
+
+#practice-21
+#To display the password expiration date for a user account in Linux, 
+# use the chage command. The chage command allows you to view and modify the password aging information for a user. To see the password expiration date,
+chage -l username
+#The chage command in Linux is used to manage user password aging information. It allows you to view and modify password expiration and other related settings for user accounts. When you run the chage command without any options, it displays the current password aging information for the specified user.
+#The -l option is used with the chage command to display the password aging information for a user account.
+
+#When you run chage -l username, it shows the following information for the specified user:
+#Last password change date: This is the date when the user's password was last changed.
+
+#Password expiration date: This is the date when the user's password will expire, and the user will be required to change it.
+
+#Minimum password age: This is the minimum number of days a password must be used before it can be changed again.
+
+#Maximum password age: This is the maximum number of days a password can be used before it expires.
+
+#Password inactive days: This is the number of days after the password has expired before the account is locked.
+
+#Account expiration date: This is the date when the user account will expire, and the user will no longer be able to log in.
+
+#Account inactive days: This is the number of days after the account has expired before it is permanently disabled.
+
+#By using the chage -l command, you can check the password aging settings for a user account and ensure that password policies are properly configured for security purposes.
+
+
+
+#practice-22
+#practicing to check if a user account is locked or not in shell scripting by using the passwd command along with the -S option. The passwd -S username command will display the status of the user account, including whether it is locked or not.
+#!/bin/bash
+
+# Replace "username" with the actual username you want to check
+username="username"
+
+# Use passwd -S to check the status of the user account
+status=$(passwd -S "$username" | awk '{print $2}')
+
+# Check if the account is locked
+if [ "$status" = "L" ]; then
+    echo "The account $username is locked."
+else
+    echo "The account $username is not locked."
+fi
+# use the passwd -S command to get the status of the user account
+#The status code "L" indicates that the account is locked, and "P" indicates that the account is active and not locked.
+
+
+
+
 
