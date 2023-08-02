@@ -105,6 +105,8 @@ if [ "$1" == "-h" ] || [ "$1" == "--help" ]
     echo "  -r, --reset   Reset password for an existing user account."
     echo "  -l, --list    List all user accounts on the system."
     echo "  -h, --help    Show this help message"
+    echo "  -i, --info    Display the user information"
+    echo "  -m, --modify  Modify user properties"
     exit 0
 fi
 
@@ -156,6 +158,38 @@ elif [ "$1" == "-l" ] || [ "$1" == "--list" ]
     echo "Username   UID"
     echo "----------------"
     awk -F: '{print $1 "   " $3}' /etc/passwd
+    
+
+# Display detailed information about a user account
+
+elif [ "$1" == "-i" ] || [ "$1" == "--info" ]
+ then
+    read -p "Enter username to display information: " info_username
+    if id "$info_username" &>/dev/null; then
+        finger "$info_username"
+    else
+        echo "Error: Username '$info_username' does not exist."
+    fi
+
+# Modify user accoun properties
+
+elif [ "$1" == "-m" ] || [ "$1" == "--modify" ]
+ then
+    read -p "Enter username to modify properties: " modify_username
+    if id "$modify_username" &>/dev/null; then
+        read -p "Enter new username (leave empty to keep current): " new_username
+        read -p "Enter new UID (leave empty to keep current): " new_uid
+        if [[ -n "$new_username" ]]; then
+            sudo usermod -l "$new_username" "$modify_username"
+            echo "Username for user '$modify_username' changed to '$new_username'."
+        fi
+        if [[ -n "$new_uid" ]]; then
+            sudo usermod -u "$new_uid" "$modify_username"
+            echo "UID for user '$modify_username' changed to '$new_uid'."
+        fi
+    else
+        echo "Error: Username '$modify_username' does not exist."
+    fi
 
 # Handle invalid options
 
