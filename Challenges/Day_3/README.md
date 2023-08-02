@@ -15,6 +15,16 @@
 ## Part 4: List User Accounts
 ![image](https://github.com/kunal-gohrani/BashBlaze-7-Days-of-Bash-Scripting-Challenge/assets/47574597/34fd7ee2-1e70-4eed-8d70-87b9fe9b2ea8)
 
+## Bonus Points
+
+### Make a update user account option
+![image](https://github.com/kunal-gohrani/BashBlaze-7-Days-of-Bash-Scripting-Challenge/assets/47574597/4a9cb641-67fb-4995-b5a8-ad0cde5c0878)
+
+### Display more information of all users in --list option
+![image](https://github.com/kunal-gohrani/BashBlaze-7-Days-of-Bash-Scripting-Challenge/assets/47574597/1bb2b3c0-0ef2-4c2a-83c3-18b68247cbab)
+
+
+
 
 
 
