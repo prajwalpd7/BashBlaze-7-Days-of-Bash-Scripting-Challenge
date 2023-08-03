@@ -209,4 +209,3 @@ case $OPTION in
 		echo "Invalid option. Check the help page for valid options"
 		;;
 esac
-
