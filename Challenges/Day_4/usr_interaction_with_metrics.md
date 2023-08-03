@@ -90,8 +90,7 @@ Note: The above example assumes that the script is implemented according to the 
 
 If you have any questions or need assistance during the challenge, feel free to connect with me on LinkedIn. Click the button below to visit my profile:
 
-[![LinkedIn Profile](https://github.com/prajwalpd7/BashBlaze-7-Days-of-Bash-Scripting-Challenge/assets/71492927/124bf4c6-4cef-4ca4-be64-f67dd3239e2a)
-](https://www.linkedin.com/in/d-prajwal/)
+[![LinkedIn Profile](../../assets/icons8-linkedin-96(@2x).png)](https://www.linkedin.com/in/d-prajwal/)
 
 ### Reference Videos
 
