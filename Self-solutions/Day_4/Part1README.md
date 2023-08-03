@@ -1,4 +1,4 @@
-please run "day4_part1_challlenge_solution.sh" and "day4_part2_challlenge_solution.sh"
+please run "day4_part1_challlenge_solution.sh"
 
 sample output for the script day3_challange_solution.sh:
 
@@ -75,7 +75,9 @@ Sending slack notification !!!!!!!!!!!
 ok
 Slack notification sent successfully !!!
 ```
+
 #After sending the slack notification below notification we can see.
+
 ![slack-notification](https://github.com/salvathshaik/BashBlaze-7-Days-of-Bash-Scripting-Challenge/assets/39498166/133e4dd7-fb64-44a5-a5b5-24b5808addeb)
 
 
