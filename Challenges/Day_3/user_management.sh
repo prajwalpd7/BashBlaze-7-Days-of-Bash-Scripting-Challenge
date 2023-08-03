@@ -95,6 +95,7 @@ updateUser() {
 		7)
 			exit;;
 		1)
+			# Change username of a valid user account
 			read -p "Enter your old username:" username
 			if ! usernameExists $username; then
 				echo "$username user does not exits"
@@ -110,6 +111,7 @@ updateUser() {
 			fi
 			;;
 		2)
+			# Change home directory of a valid user account
 			read -p "Enter your username:" username
                         if ! usernameExists $username; then
                                 echo "$username user does not exits"
@@ -119,6 +121,7 @@ updateUser() {
 			sudo usermod -m -d "$homedirectory" "$username"
 			;;
 		3)
+			# Change default shell of a user account
             		read -p "Enter the username:" username
 			if ! usernameExists $username; then
                                 echo "$username user does not exits"
@@ -138,6 +141,7 @@ updateUser() {
 			fi
 			;;
 		4)
+			# Lock a valid user account
 			read -p "Enter the username:" username
 			if ! usernameExists $username; then
                                 echo "$username user does not exits"
@@ -152,6 +156,7 @@ updateUser() {
                         fi
 			;;
 		5)
+			# Unlock a valid user account
 		       read -p "Enter the username:" username
                         if ! usernameExists $username; then
                                 echo "$username user does not exits"
@@ -166,6 +171,7 @@ updateUser() {
                         fi
                         ;;
 		6)
+			# Change UID of a valid user account
 			read -p "Enter the username:" username
                         if ! usernameExists $username; then
                                 echo "$username user does not exits"
@@ -177,6 +183,7 @@ updateUser() {
 	esac
 }
 
+# Start of Script
 
 OPTION=$1
 case $OPTION in
