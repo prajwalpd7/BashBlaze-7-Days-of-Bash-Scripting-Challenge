@@ -2,6 +2,7 @@ please run "day4_part1_challlenge_solution.sh" and "day4_part2_challlenge_soluti
 
 sample output for the script day3_challange_solution.sh:
 
+```
 root@ip-172-31-91-38:~/BashBlaze-7-Days-of-Bash-Scripting-Challenge/Self-solutions/Day_4# ./day4_part1_challenge_solution.sh nginx
 
 Mentioned process 'nginx' is running in the system !!!
@@ -73,7 +74,7 @@ Sending slack notification !!!!!!!!!!!
 
 ok
 Slack notification sent successfully !!!
-
+```
 #After sending the slack notification below notification we can see.
 ![slack-notification](https://github.com/salvathshaik/BashBlaze-7-Days-of-Bash-Scripting-Challenge/assets/39498166/133e4dd7-fb64-44a5-a5b5-24b5808addeb)
 
