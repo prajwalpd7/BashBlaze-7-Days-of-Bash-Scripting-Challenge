@@ -1,23 +1,29 @@
 #!/bin/bash
 
-# Part 1: File and Directory Exploration
-echo "Welcome to the Interactive File and Directory Explorer!"
+# Welcome Message for the user
+echo 'Welcome to the Interactive File and Directory Explorer!'
+echo ''
+echo 'Files and Directories in the Current Path:'
+# echo ''
 
-while true; do
-    # List all files and directories in the current path
-    echo "Files and Directories in the Current Path:"
-    ls -lh
+# Using ls command to list all the content in current path. 
+# -lhR flags with print items in listing format showing size in human readable format recursively.
+# awk command will filter out only file or folder name and their size.
+# sed will delete the lines with blank () in the output.
+ls -lhR | awk 'NF>0 {print $9 "("$5")"}' | sed '/()/d'
 
-    # Part 2: Character Counting
-    read -p "Enter a line of text (Press Enter without text to exit): " input
 
-    # Exit if the user enters an empty string
-    if [ -z "$input" ]; then
-        echo "Exiting the Interactive Explorer. Goodbye!"
-        break
+# Creating a while loop which will ask user to provide any line of text and as show total characters in that line as output.
+# Pressing Enter key will exit out of the program.
+while true
+do
+    read -p "Enter a line of text (Press Enter without text to exit): " line_of_text
+    if [[ $line_of_text = "" ]]; 
+    then echo "Exiting the Interactive Explorer. Goodbye!" 
+    break
+    else
+    echo "No. of characters: ${#line_of_text}"
     fi
-
-    # Calculate and print the character count for the input line
-    char_count=$(echo -n "$input" | wc -m)
-    echo "Character Count: $char_count"
 done
+
+

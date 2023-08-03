@@ -1,94 +1,73 @@
 #!/bin/bash
 
-# Function to display usage information and available options
-function display_usage {
-    echo "Usage: $0 [OPTIONS]"
-    echo "Options:"
-    echo "  -c, --create     Create a new user account."
-    echo "  -d, --delete     Delete an existing user account."
-    echo "  -r, --reset      Reset password for an existing user account."
-    echo "  -l, --list       List all user accounts on the system."
-    echo "  -h, --help       Display this help and exit."
+############################################################
+# Help                                                     #
+############################################################
+Help()
+{
+   # Display Help
+   echo "Usage: ./user_management.sh [OPTIONS]"
+   echo
+   echo "Options:"
+   echo "-c, --create	Create a new user account."
+   echo "-d, --delete	Delete an existing user account."
+   echo "-r, --reset	Reset password for an existing user account."
+   echo "-l, --list	List all user accounts on the system."
+   echo "-h, --help	Display this help and exit."
+   echo "-i, --info	Display Extra User Info."
+   echo "-u, --uname	Change username."
 }
 
-# Function to create a new user account
-function create_user {
-    read -p "Enter the new username: " username
 
-    # Check if the username already exists
-    if id "$username" &>/dev/null; then
-        echo "Error: The username '$username' already exists. Please choose a different username."
-    else
-        # Prompt for password (Note: You might want to use 'read -s' to hide the password input)
-        read -p "Enter the password for $username: " password
+############################################################
+# Main program                                             #
+############################################################
 
-        # Create the user account
-        useradd -m -p "$password" "$username"
-        echo "User account '$username' created successfully."
-    fi
-}
-
-# Function to delete an existing user account
-function delete_user {
-    read -p "Enter the username to delete: " username
-
-    # Check if the username exists
-    if id "$username" &>/dev/null; then
-        userdel -r "$username"  # -r flag removes the user's home directory
-        echo "User account '$username' deleted successfully."
-    else
-        echo "Error: The username '$username' does not exist. Please enter a valid username."
-    fi
-}
-
-# Function to reset the password for an existing user account
-function reset_password {
-    read -p "Enter the username to reset password: " username
-
-    # Check if the username exists
-    if id "$username" &>/dev/null; then
-        # Prompt for password (Note: You might want to use 'read -s' to hide the password input)
-        read -p "Enter the new password for $username: " password
-
-        # Set the new password
-        echo "$username:$password" | chpasswd
-        echo "Password for user '$username' reset successfully."
-    else
-        echo "Error: The username '$username' does not exist. Please enter a valid username."
-    fi
-}
-
-# Function to list all user accounts on the system
-function list_users {
-    echo "User accounts on the system:"
-    cat /etc/passwd | awk -F: '{ print "- " $1 " (UID: " $3 ")" }'
-}
-
-# Check if no arguments are provided or if the -h or --help option is given
-if [ $# -eq 0 ] || [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
-    display_usage
-    exit 0
-fi
-
-# Command-line argument parsing
-while [ $# -gt 0 ]; do
-    case "$1" in
-        -c|--create)
-            create_user
-            ;;
-        -d|--delete)
-            delete_user
-            ;;
-        -r|--reset)
-            reset_password
-            ;;
-        -l|--list)
-            list_users
-            ;;
-        *)
-            echo "Error: Invalid option '$1'. Use '--help' to see available options."
-            exit 1
-            ;;
-    esac
-    shift
-done
+	if [ "$1" = "--create" -o "$1" = "-c" ]; then
+	   read -p "Enter username: " username
+	   read -p "Enter password: " userpass
+	   if id "$username" >/dev/null 2>&1; then
+	   echo "ERROR: User already present. Please choose a different username."
+	   else
+	   sudo useradd $username
+	   echo "SUCCESS: User account for $username created Successfully."
+	   fi
+	elif [ "$1" = "--delete" -o "$1" = "-d" ]; then
+	    read -p "Enter username to delete: " username
+	    read -p "Please confirm (y/n): " option
+	    if [ $option = 'y' ]; then
+	    	if id "$username" >/dev/null 2>&1; then
+	        sudo userdel $username
+	    	echo "SUCCESS: User deleted Successfully."
+	        else
+	    	echo 'ERROR: User not present. Please Check.'
+		fi
+	    else echo 'Cancelling User Deletion Process.'
+	    fi
+	elif [ "$1" = "--reset" -o "$1" = "-r" ]; then
+	    read -p "Enter the username to reset password: " username
+		if id "$username" >/dev/null 2>&1; then
+		read -p 'Enter new password: ' userpass
+		sudo chpasswd <<< "$username:$userpass"
+		echo 'SUCCESS: Password reset successfully.'
+		else echo 'ERROR: User not present'
+		fi 
+	elif [ "$1" = "--list" -o "$1" = "-l" ]; then
+	cat /etc/passwd | awk -F':' '{print $1 " (ID: "$3")"}'
+	elif [ "$1" = "--info" -o "$1" = "-i" ]; then
+	read -p "Enter the username to get additional info: " username
+                if id "$username" >/dev/null 2>&1; then
+		echo '====== USER INFO ======'
+                lslogins -u $username
+                else echo 'ERROR: User not present'
+                fi
+	elif [ "$1" = "--uname" -o "$1" = "-u" ]; then
+        read -p "Enter the username to change: " username
+                if id "$username" >/dev/null 2>&1; then
+		read -p "Enter new username: " newuser
+		echo 'SUCCESS: Username updated successfully.'
+		sudo usermod -l $newuser $username
+                else echo 'ERROR: User not present'
+                fi
+	elif [ "$1" = "" -o "$1" = "--help" -o "$1" = "-h" ]; then Help
+	fi
