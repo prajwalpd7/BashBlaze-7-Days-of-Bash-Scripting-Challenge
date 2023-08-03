@@ -1,41 +1,24 @@
+
+###################################################################
+# Author: Sasiram Beeke
+# Date: 01/08/2023
+# Description: Interactive File and Directory Explorer
+# Tip: to execute shell give permision +x scriptname
+###################################################################
+
 #!/bin/bash
-
-# Function to display usage information and available options
-function display_usage {
-    echo "Usage: $0 /path/to/source_directory"
-}
-
-# Check if a valid directory path is provided as a command-line argument
-if [ $# -eq 0 ] || [ ! -d "$1" ]; then
-    echo "Error: Please provide a valid directory path as a command-line argument."
-    display_usage
-    exit 1
-fi
-
-# Directory path of the source directory to be backed up
-source_dir="$1"
-
-# Function to create a timestamped backup folder
-function create_backup {
-    local timestamp=$(date '+%Y-%m-%d_%H-%M-%S')  # Get the current timestamp
-    local backup_dir="${source_dir}/backup_${timestamp}"
-
-    # Create the backup folder with the timestamped name
-    mkdir "$backup_dir"
-    echo "Backup created successfully: $backup_dir"
-}
-
-# Function to perform the rotation and keep only the last 3 backups
-function perform_rotation {
-    local backups=($(ls -t "${source_dir}/backup_"* 2>/dev/null))  # List existing backups sorted by timestamp
-
-    # Check if there are more than 3 backups
-    if [ "${#backups[@]}" -gt 3 ]; then
-        local backups_to_remove="${backups[@]:3}"  # Get backups beyond the last 3
-        rm -rf "${backups_to_remove[@]}"  # Remove the oldest backups
-    fi
-}
-
-# Main script logic
-create_backup
-perform_rotation
+# accept argument and assing it to source_dir variable
+source_dir=$1
+# create timestamp and store it to timestamp variable
+timestamp=$(date +%Y-%m-%d-%H-%M-%S)
+# Create the backup folder name using the timestamp
+dir_name="backup_${timestamp}"
+backup_folder="${source_dir}/${dir_name}"
+mkdir "${backup_folder}"
+#The script uses rsync to copy the contents of the source directory to the backup folder. 
+#The rsync command ensures that the backup folder itself is excluded from the copy.
+rsync -av --exclude="${dir_name}" "$source_dir/" "$backup_folder"
+# Find and remove older backups, retaining only the last 3 backups
+find "$source_dir" -maxdepth 1 -type d -name "backup_*" | sort | head -n -3 | xargs rm -rf
+# Print a success message
+echo "Backup created: $backup_folder"

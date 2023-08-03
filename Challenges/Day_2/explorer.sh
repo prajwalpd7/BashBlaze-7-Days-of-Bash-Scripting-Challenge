@@ -1,23 +1,23 @@
+
+###################################################################
+# Author: Sasiram Beeke
+# Date: 01/08/2023
+# Description: Interactive File and Directory Explorer
+# Tip: to execute shell give permision +x scriptname
+###################################################################
+
 #!/bin/bash
-
-# Part 1: File and Directory Exploration
 echo "Welcome to the Interactive File and Directory Explorer!"
-
+echo "Files and Directories in the Current Path:"
+ls -lh| awk '{print $9, "(" $5 ")"}'
 while true; do
-    # List all files and directories in the current path
-    echo "Files and Directories in the Current Path:"
-    ls -lh
+ # Ask the user if they want to exit the explorer
+    read -p "Enter a line of text (press Enter without text to exit):" input
 
-    # Part 2: Character Counting
-    read -p "Enter a line of text (Press Enter without text to exit): " input
-
-    # Exit if the user enters an empty string
-    if [ -z "$input" ]; then
-        echo "Exiting the Interactive Explorer. Goodbye!"
+    # Check the user's choice
+    if [[ -z "$input" ]];then
         break
     fi
-
-    # Calculate and print the character count for the input line
-    char_count=$(echo -n "$input" | wc -m)
-    echo "Character Count: $char_count"
+     echo "Character count:$(echo -n "$input" | wc -m)"  
 done
+    echo "Exiting the Interactive Explorer. Goodbye!"
