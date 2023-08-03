@@ -2,6 +2,7 @@ please run day4_part2_challenge_solution.sh file.
 
 sample output of this script as follows
 
+```
 root@ip-172-31-91-38:~/BashBlaze-7-Days-of-Bash-Scripting-Challenge/Self-solutions/Day_4# ./day4_part2_challenge_solution.sh
 
 Main Menu
@@ -158,4 +159,5 @@ Enter your option:3
 
 Exiting ..
 
+```
 
