@@ -111,9 +111,9 @@ fi
 
 ##################################     Automation     #########################
 #############################Improvised and automated this script using crontab like below as an advancement.
-#I have used crontab to schedule the backup script to run every day at 11:50 PM.
+#I have used crontab to schedule the backup script to run for every 30 minutes.
 #opened the crontab configuration by running : crontab -e and then you can run crontab -l to see the scheduled configurations.
-#and added the following line at the end of the crontab file: 50 23 * * * /root/shell-scripting-projects/2_backup_log_files.sh >> /root/backup_log.log 2>&1
+#and added the following line at the end of the crontab file: */30 * * * * /root/BashBlaze-7-Days-of-Bash-Scripting-Challenge/Self-solutions/Day_4/day4_part1__challange_solution.sh  >> /root/backup_log.log 2>&1
                                                                                                                                  #the >> operator appends the output (both standard output and standard error) of the cron job to the specified log file (backup_log.log). The 2>&1 part ensures that both standard output (1) and standard error (2) are redirected to the log file.
 
 
