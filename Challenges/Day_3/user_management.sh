@@ -1,94 +1,103 @@
 #!/bin/bash
 
-# Function to display usage information and available options
-function display_usage {
-    echo "Usage: $0 [OPTIONS]"
-    echo "Options:"
-    echo "  -c, --create     Create a new user account."
+options() {
+    echo Usage: $(basename "$0") [OPTIONS]
+    echo Options:
+    echo "  -c, --create     Ceate a new user account."
     echo "  -d, --delete     Delete an existing user account."
-    echo "  -r, --reset      Reset password for an existing user account."
-    echo "  -l, --list       List all user accounts on the system."
-    echo "  -h, --help       Display this help and exit."
+	echo "  -r, --reset      Reset the password of an existing user account."
+  	echo "  -l, --list       List all user accounts on the system."
+  	echo "  -h, --help       Display this help and exit."
 }
 
 # Function to create a new user account
-function create_user {
-    read -p "Enter the new username: " username
+create_user_account() {
+    read -p "Enter new username: " username
 
     # Check if the username already exists
     if id "$username" &>/dev/null; then
-        echo "Error: The username '$username' already exists. Please choose a different username."
-    else
-        # Prompt for password (Note: You might want to use 'read -s' to hide the password input)
-        read -p "Enter the password for $username: " password
-
-        # Create the user account
-        useradd -m -p "$password" "$username"
-        echo "User account '$username' created successfully."
+        echo "the Username '$username' already exists. Please choose a different username."
+        exit 1
     fi
+
+    # Prompt for password and create the user account
+    read -s -p "Enter new password: " password
+    echo
+    sudo useradd -m -s /bin/bash "$username"
+    echo "$username:$password" | sudo chpasswd
+    echo "user Account '$username' created successfully."
 }
 
 # Function to delete an existing user account
-function delete_user {
-    read -p "Enter the username to delete: " username
+delete_user_account() {
+    read -p "Enter username to delete: " username
 
     # Check if the username exists
-    if id "$username" &>/dev/null; then
-        userdel -r "$username"  # -r flag removes the user's home directory
-        echo "User account '$username' deleted successfully."
-    else
-        echo "Error: The username '$username' does not exist. Please enter a valid username."
+    if ! id "$username" &>/dev/null; then
+        echo "the Username '$username' does not exists. Please enter a valid username."
+        exit 1
     fi
+
+    sudo userdel -r "$username"
+    echo "user Account '$username' deleted successfully."
 }
 
-# Function to reset the password for an existing user account
-function reset_password {
-    read -p "Enter the username to reset password: " username
+# Function to reset the password of an existing user account
+reset_password() {
+    read -p "Enter username to reset password: " username
 
     # Check if the username exists
-    if id "$username" &>/dev/null; then
-        # Prompt for password (Note: You might want to use 'read -s' to hide the password input)
-        read -p "Enter the new password for $username: " password
-
-        # Set the new password
-        echo "$username:$password" | chpasswd
-        echo "Password for user '$username' reset successfully."
-    else
-        echo "Error: The username '$username' does not exist. Please enter a valid username."
+    if ! id "$username" &>/dev/null; then
+        echo "the Username '$username' does not exists. Please enter a valid username."
+        exit 1
     fi
+
+    read -s -p "Enter new password: " password
+    echo
+    echo "$username:$password" | sudo chpasswd
+
+    echo "Password for user '$username' reset successfully."
 }
 
-# Function to list all user accounts on the system
-function list_users {
-    echo "User accounts on the system:"
-    cat /etc/passwd | awk -F: '{ print "- " $1 " (UID: " $3 ")" }'
+# Function to list all user accounts
+list_user_accounts() {
+    echo "User Accounts on the system:"
+    awk -F':'  '{print "- " $1 "\t(UID: " $3")"}' /etc/passwd
 }
 
-# Check if no arguments are provided or if the -h or --help option is given
-if [ $# -eq 0 ] || [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
-    display_usage
-    exit 0
+# Function to display usage information
+display_usage() {
+    options
+    }
+
+# Check if no argument is provided
+if [ -z "$1" ]; then
+    options
+    exit 1
 fi
 
-# Command-line argument parsing
-while [ $# -gt 0 ]; do
+# Check for command-line options
+while [[ $# -gt 0 ]]; do
     case "$1" in
-        -c|--create)
-            create_user
-            ;;
-        -d|--delete)
-            delete_user
-            ;;
-        -r|--reset)
-            reset_password
-            ;;
-        -l|--list)
-            list_users
-            ;;
-        *)
-            echo "Error: Invalid option '$1'. Use '--help' to see available options."
-            exit 1
-            ;;
-    esac
-    shift
+    -c|--create)
+        create_user_account
+        ;;
+    -d|--delete)
+        delete_user_account
+        ;;
+    -r|--reset)
+        reset_password
+        ;;
+    -l|--list)
+        list_user_accounts
+        ;;
+    -h|--help)
+        display_usage
+        ;;
+    *)
+        echo "'$1' is not a valid option. See '$(basename "$0")' -h or --help' for available options."
+        exit 1
+        ;;
+esac
+shift
 done
