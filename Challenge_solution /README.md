@@ -48,9 +48,6 @@ After the script attempts to restart the Nginx process automatically, you can ve
 ![image](https://github.com/isonalam/BashBlaze-7-Days-of-Bash-Scripting-Challenge/assets/117289524/51282502-2fda-4405-ab15-3cb877df3b31)
 
 
-## Bonus:
-
-Implementing a notification mechanism (e.g., email, Slack message) to alert administrators if the process requires manual intervention after a certain number of restart attempts.
 
 
 
