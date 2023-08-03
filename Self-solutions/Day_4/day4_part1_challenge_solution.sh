@@ -94,7 +94,7 @@ else
 			echo
 			echo "Sending slack notification !!!!!!!!!!!"
 			echo 
-			SLACK_WEBHOOK_URL="https://hooks.slack.com/services/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"
+			SLACK_WEBHOOK_URL="https://hooks.slack.com/services/place-your-webhook-url"
 			SLACK_CHANNEL="#shell-scripting-projects"
 			SLACK_USERNAME="Process Monitor"
 			SLACK_ICON_EMOJI=":warning:"
