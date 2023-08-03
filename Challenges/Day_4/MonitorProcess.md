@@ -20,6 +20,12 @@ In this case, the script failed to start nginx after 3 tries and then sent a mai
 
 **NOTE:** Certain configurations need to be done to enable sending mails from Linus shell, please refer to this video for the configurations: https://www.youtube.com/watch?v=blYx6VQEPXY 
 
+# How to automate monitoring using a cron job?
+The script can be automated by creating an entry in the crontab in Linux. For example I have created an entry in crontab to monitor the process every 1 minute:
+
+![image](https://github.com/kunal-gohrani/BashBlaze-7-Days-of-Bash-Scripting-Challenge/assets/47574597/b95bae84-515e-42c4-81c4-6beea5dd55b1)
+
+
 
 
 
