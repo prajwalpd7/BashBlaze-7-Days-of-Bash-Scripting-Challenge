@@ -58,11 +58,13 @@ sudo systemctl status nginx
 
 
 
+-------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
 
+![Ssofterminal](https://github.com/prajwalpd7/BashBlaze-7-Days-of-Bash-Scripting-Challenge/assets/71492927/4939241c-66f7-4445-bab5-6e8e8faa9d3f)
 
-![Ssofterminal](https://github.com/sk3pp3r/cheat-sheet-pdf/raw/main/assets/71492927/d82ea770-db45-40ea-9f3d-1007f5d2cb4c.png)
+-------------------------------------------------------------------------------------------------------------------------------------------
 
-![Ssofterminal](https://github.com/sk3pp3r/cheat-sheet-pdf/raw/main/assets/71492927/3f32cc66-dc31-4264-907a-06d003f4716c.png)
+![Ssofterminal](https://github.com/prajwalpd7/BashBlaze-7-Days-of-Bash-Scripting-Challenge/assets/71492927/b54073b7-2ba6-4727-8d74-bb64a25b273e)
