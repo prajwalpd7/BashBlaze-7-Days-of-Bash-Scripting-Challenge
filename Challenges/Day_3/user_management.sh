@@ -185,6 +185,12 @@ updateUser() {
 
 # Start of Script
 
+# If no arguments, show help page
+if [[ $# -eq 0 ]];then
+	showHelp
+	exit 0
+fi
+
 OPTION=$1
 case $OPTION in
 	-c | --create)
