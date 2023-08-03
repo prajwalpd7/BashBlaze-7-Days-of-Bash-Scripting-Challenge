@@ -22,8 +22,23 @@ first(){
 	disk_usage=`df | grep dtworkspace | awk '{print 100*$4/$3}'`
 
 	echo "CPU Usage : $cpu_usage% Mem usage: $mem_usage% Disk Space: $disk_usage%"
-	read -p "Press enter to continue: " opt
+	#read -p "Press enter to continue: " opt
+	sleep_mech
 }
+
+sleep_mech(){
+	#we will ask how much seconds to wait before we get the updated usage details
+	echo ""
+	read -p "How much seconds would you like to wait before displaying the updated usage details? " sl
+	if [ ${#sl} -eq 0 ]
+	then
+		read -p "Press enter to continue: " opt	
+	else
+		sleep $sl
+		first
+	fi
+}
+
 
 start_ser(){
 	case "$2" in
@@ -102,8 +117,4 @@ do
 		echo "This is an invalid option."
 		;;
 esac
-
-#we will ask how much seconds to wait before re-entering the options.
-read -p "How much seconds would you like to wait before entering the next option? " sl
-sleep $sl
 done
