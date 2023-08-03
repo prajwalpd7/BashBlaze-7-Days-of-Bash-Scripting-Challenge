@@ -1,41 +1,37 @@
 #!/bin/bash
 
-# Function to display usage information and available options
-function display_usage {
-    echo "Usage: $0 /path/to/source_directory"
-}
+# Asking user to provide the directory path to take backup of
+read -p "Please provide path to take back up of: " src_dir
+echo $src_dir
 
-# Check if a valid directory path is provided as a command-line argument
-if [ $# -eq 0 ] || [ ! -d "$1" ]; then
-    echo "Error: Please provide a valid directory path as a command-line argument."
-    display_usage
-    exit 1
+# Creating back up folder
+echo "Creating back up..."
+
+# Setting Current Time using date command
+current_time=$(date "+%Y-%m-%d_%H-%M-%S")
+# echo "Current Time : $current_time"
+
+# Creating back up folder by appending current time with backup_
+backup_folder=$src_dir/backup_$current_time
+
+# Getting count of back up folders
+file_count=$(ls -l $src_dir | awk '/backup_/' | wc -l)
+# echo $file_count
+
+# Getting the name of oldest file
+oldest_file=$(ls -l $src_dir | awk '/backup_/ {print $9}' | head -1)
+# echo $oldest_file
+
+# Using condition to check if there are 3 back up folders already present then remove the oldest one and add the new.
+if [ $file_count -eq 3 ]
+then
+    echo "Removing Oldest File: $oldest_file"
+    rm -r "$src_dir/$oldest_file"
 fi
 
-# Directory path of the source directory to be backed up
-source_dir="$1"
+# using rysnc to copy src folder and copying it into backup folder. rsync helped in excluding older back up folders.
+rsync -ar $src_dir/. $backup_folder --exclude /backup*
 
-# Function to create a timestamped backup folder
-function create_backup {
-    local timestamp=$(date '+%Y-%m-%d_%H-%M-%S')  # Get the current timestamp
-    local backup_dir="${source_dir}/backup_${timestamp}"
+echo "Backup created: $backup_folder"
 
-    # Create the backup folder with the timestamped name
-    mkdir "$backup_dir"
-    echo "Backup created successfully: $backup_dir"
-}
 
-# Function to perform the rotation and keep only the last 3 backups
-function perform_rotation {
-    local backups=($(ls -t "${source_dir}/backup_"* 2>/dev/null))  # List existing backups sorted by timestamp
-
-    # Check if there are more than 3 backups
-    if [ "${#backups[@]}" -gt 3 ]; then
-        local backups_to_remove="${backups[@]:3}"  # Get backups beyond the last 3
-        rm -rf "${backups_to_remove[@]}"  # Remove the oldest backups
-    fi
-}
-
-# Main script logic
-create_backup
-perform_rotation
