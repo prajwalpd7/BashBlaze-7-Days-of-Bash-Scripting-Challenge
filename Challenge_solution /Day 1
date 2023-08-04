@@ -1,0 +1,47 @@
+#!/bin/bash 
+
+#Task 1 
+
+# This is a comment, it will not show in output
+
+
+#Task 2 
+
+echo "Hello world, My name is Sonal"
+
+
+#Task 3 
+
+value1="GOOD"
+value2="MORNING"
+
+echo $value1
+echo $value2
+
+
+#Task 4
+
+read -p "Type first number: " number1
+echo "First number is $number1"
+read -p "Type second number: " number2
+echo "Second number is $number2"
+
+sum=$((number1 + number2))
+echo "The sum of number1 and number2 is $sum"
+
+
+#Task 5
+
+name=$(whoami)
+host=$(hostname)
+date=$(date | awk '{print $1,$2,$3,$6}')
+
+echo "My name is $name"
+echo "You are into $host"
+echo "Today is $date"
+
+
+#Task 6
+
+echo "All the files with the extension .sh are here:"
+ls *.sh 
