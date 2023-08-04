@@ -1,0 +1,73 @@
+
+                            Log Analasys report                               
+
+Date of analysis: 2023-08-04-18-04-18
+Log file name: /root/BashBlaze-7-Days-of-Bash-Scripting-Challenge/Self-solutions/Day_5/logfile.log
+Total lines processed: 300
+Total error count: 61
+
+Top 5 Error Messages are as follows: 
+11 - Failed to connect
+10 - Segmentation fault
+8 - Disk full
+6 - Permission denied
+6 - Invalid input
+
+
+printing the 'CRITICAL' log level occurences with their line numbers of logfile.
+
+Line number -2 : 2023-08-04 14:52:26 [CRITICAL]  - 9931
+Line number -12 : 2023-08-04 14:52:26 [CRITICAL]  - 18610
+Line number -15 : 2023-08-04 14:52:26 [CRITICAL]  - 32604
+Line number -17 : 2023-08-04 14:52:26 [CRITICAL]  - 8022
+Line number -28 : 2023-08-04 14:52:26 [CRITICAL]  - 6799
+Line number -30 : 2023-08-04 14:52:26 [CRITICAL]  - 18552
+Line number -32 : 2023-08-04 14:52:26 [CRITICAL]  - 11113
+Line number -37 : 2023-08-04 14:52:26 [CRITICAL]  - 19571
+Line number -39 : 2023-08-04 14:52:26 [CRITICAL]  - 2854
+Line number -40 : 2023-08-04 14:52:26 [CRITICAL]  - 15066
+Line number -42 : 2023-08-04 14:52:26 [CRITICAL]  - 28344
+Line number -46 : 2023-08-04 14:52:26 [CRITICAL]  - 13775
+Line number -47 : 2023-08-04 14:52:26 [CRITICAL]  - 31720
+Line number -52 : 2023-08-04 14:52:26 [CRITICAL]  - 8107
+Line number -58 : 2023-08-04 14:52:26 [CRITICAL]  - 4078
+Line number -61 : 2023-08-04 14:52:26 [CRITICAL]  - 9364
+Line number -66 : 2023-08-04 14:52:26 [CRITICAL]  - 22911
+Line number -71 : 2023-08-04 14:52:26 [CRITICAL]  - 8673
+Line number -74 : 2023-08-04 14:52:26 [CRITICAL]  - 23188
+Line number -83 : 2023-08-04 14:52:26 [CRITICAL]  - 29553
+Line number -86 : 2023-08-04 14:52:26 [CRITICAL]  - 29900
+Line number -98 : 2023-08-04 14:52:26 [CRITICAL]  - 14104
+Line number -99 : 2023-08-04 14:52:26 [CRITICAL]  - 31900
+Line number -105 : 2023-08-04 14:52:26 [CRITICAL]  - 17537
+Line number -106 : 2023-08-04 14:52:26 [CRITICAL]  - 32729
+Line number -110 : 2023-08-04 14:52:26 [CRITICAL]  - 22285
+Line number -111 : 2023-08-04 14:52:26 [CRITICAL]  - 17009
+Line number -120 : 2023-08-04 14:52:26 [CRITICAL]  - 18616
+Line number -121 : 2023-08-04 14:52:26 [CRITICAL]  - 31053
+Line number -160 : 2023-08-04 14:52:26 [CRITICAL]  - 12532
+Line number -161 : 2023-08-04 14:52:26 [CRITICAL]  - 28216
+Line number -162 : 2023-08-04 14:52:26 [CRITICAL]  - 31835
+Line number -163 : 2023-08-04 14:52:26 [CRITICAL]  - 5721
+Line number -174 : 2023-08-04 14:52:26 [CRITICAL]  - 11648
+Line number -178 : 2023-08-04 14:52:26 [CRITICAL]  - 8364
+Line number -180 : 2023-08-04 14:52:26 [CRITICAL]  - 24481
+Line number -186 : 2023-08-04 14:52:26 [CRITICAL]  - 5536
+Line number -194 : 2023-08-04 14:52:26 [CRITICAL]  - 6033
+Line number -196 : 2023-08-04 14:52:26 [CRITICAL]  - 12167
+Line number -206 : 2023-08-04 14:52:26 [CRITICAL]  - 14222
+Line number -212 : 2023-08-04 14:52:26 [CRITICAL]  - 10208
+Line number -214 : 2023-08-04 14:52:26 [CRITICAL]  - 32682
+Line number -220 : 2023-08-04 14:52:26 [CRITICAL]  - 5664
+Line number -224 : 2023-08-04 14:52:26 [CRITICAL]  - 2668
+Line number -228 : 2023-08-04 14:52:26 [CRITICAL]  - 5712
+Line number -238 : 2023-08-04 14:52:26 [CRITICAL]  - 14774
+Line number -241 : 2023-08-04 14:52:26 [CRITICAL]  - 5768
+Line number -257 : 2023-08-04 14:52:26 [CRITICAL]  - 23214
+Line number -264 : 2023-08-04 14:52:27 [CRITICAL]  - 11714
+Line number -274 : 2023-08-04 14:52:27 [CRITICAL]  - 5122
+Line number -286 : 2023-08-04 14:52:27 [CRITICAL]  - 19055
+Line number -287 : 2023-08-04 14:52:27 [CRITICAL]  - 5441
+Line number -291 : 2023-08-04 14:52:27 [CRITICAL]  - 9692
+Line number -294 : 2023-08-04 14:52:27 [CRITICAL]  - 17933
+
