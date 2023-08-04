@@ -15,17 +15,22 @@ check_service_exists(){
 }
 
 # Function to check if the process is running
-check_process_status() {
-    systemctl is-active $PROCESS_NAME 2> /dev/null
+is_process_active() {
+    local process_status=$(systemctl is-active $PROCESS_NAME 2> /dev/null)
+    if [[ "$process_status" == "active" ]]; then
+        exit 0
+    else
+        exit 1
+    fi
 }
 
 # Function to restart the process
 restart_process() {
+    echo
     echo "Process '$PROCESS_NAME' is not running. Attempting to restart..."
     # Loop to check and restart the process
     for ((attempt=1; attempt<=$MAX_RESTART_ATTEMPTS; attempt++)); do
-        local process_status=$(check_process_status)
-        if [[ "$process_status" == "active" ]]; then
+        if $(is_process_active); then
             echo "Process '$PROCESS_NAME' is running properly now."
             break
         else
@@ -38,23 +43,25 @@ restart_process() {
             fi
         fi
     done
+    echo
 }
 
 
 main(){
+    echo
     # check if the services exists for the given process name
     check_service_exists
     if [ $? -eq 1 ];
     then
         echo "Service for process '$PROCESS_NAME' doesnot exists."
     else
-        local process_status=$(check_process_status)
-        if [[ "$process_status" == "active" ]]; then
+        if $(is_process_active); then
             echo "Process '$PROCESS_NAME' is running properly."
         else
             restart_process
         fi
     fi
+    echo
 }
 
 main
