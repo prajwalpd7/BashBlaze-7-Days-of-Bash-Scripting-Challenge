@@ -8,4 +8,8 @@ feature 4
 
 feature 5
 
+<<<<<<< HEAD
 feature 7
+=======
+feature 6
+>>>>>>> b9728a214b89340529b28ce5a48e1fc2e3e1f443
