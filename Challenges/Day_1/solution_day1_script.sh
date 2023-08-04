@@ -1,31 +1,44 @@
 #!/bin/bash
+# Author: Yashraj Jaiswal
+# Date: 01-08-2023
+# Description: #TWSBashBlazeChallenge Day - 1
 
-# First line of the script is the shebang which tells the system how to execute
+# Task 1: Comments
+# - Comments are lines in a script that are ignored by the interpreter and help us describe the script.
 
-# Task  2: Echo
-echo "Scripting is fun with @TWS"
+# Task 2 : echo
+echo "Today is Day 1 of #TWSBashBlazeChallenge an amazing bash scripting challenge"
 
-# Task  3: Variables
-variable1="Hello"
-variable2="Bash"
+# Task 3: Variables
 
-# Task  4: Using Variables
-greeting="$variable1, $variable2!"
-echo "$greeting Welcome to the world of Bash scripting!"
+# declaring and initializing variables
+name = "Yashraj Jaiswal"
+interests = "web dev | devops"
 
-# Task  5: Using Built-in Variables
-echo "My current bash path - $BASH"
-echo "Bash version I am using - $BASH_VERSION"
-echo "PID of bash I am running - $$"
-echo "My home directory - $HOME"
-echo "Where am I currently? - $PWD"
-echo "My hostname - $HOSTNAME"
+# Task 4: Using Variables
 
-# Task  6: Wildcards
-echo "Files with .txt extension in the current directory:"
-ls *.txt
+echo "Hello, my name is $name and I am interesed in $interests"
 
+# Task 5: Using Built-in Variables
+#use built-in variables from bash to print useful information
 
+# print the host name
+echo "Hostname: $HOSTNAME"
 
-#Make sure to provide execution permission with the following command:
-#chmod +x day1_script.sh
+# print the current user
+echo "Current user: $USER"
+
+# print the current working directory
+echo "Current directory: $PWD"
+
+# Task 6: Wildcards
+
+# using * wild card to search for files ending in .txt
+ls -al *.txt
+
+# using ? wild card to search for files names ending with a single unknown character
+ls -al file?.txt
+
+# using [] wild card to search for files that start with 'file' and have numbers 0-5
+ls -al 'file[0-5]'.txt
+
