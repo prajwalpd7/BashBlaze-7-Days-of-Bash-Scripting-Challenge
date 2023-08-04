@@ -1,6 +1,6 @@
 Summary Report
-Date_of_analysis: 2023-08-04 23:57:07
-Log_file_name: 	Sample_data/logfile.log
+Date_of_analysis: 2023-08-05 00:34:37
+Log_file_name: 	Archive_directory/20230805002322_
 Total_lines_processed: 200
 Total_error_count: 34
 

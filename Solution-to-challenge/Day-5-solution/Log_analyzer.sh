@@ -71,4 +71,14 @@ echo "$Summary_report" > "$Summary_file"
 
 echo "Summary_report_generated: $Summary_file"
 
+#To automatically archive or move processed log files to a designated directory after analysis
 
+#To define a designated directory for the archived log files
+archive_dir="Archive_directory"
+
+#To Generate a filename  
+archive_filename=$(date "+%Y%m%d%H%M%S")_"$(basename "$log_file")"
+
+
+#Move the logfile to the archived directory
+mv "$logfile" "$archive_dir/$archive_filename"
