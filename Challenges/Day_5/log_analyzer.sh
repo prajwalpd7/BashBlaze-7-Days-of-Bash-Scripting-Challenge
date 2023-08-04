@@ -69,6 +69,8 @@ generateSummaryReport() {
 }
 
 ARCHIVE_FOLDER="./archived_logs"
+
+# Generating summary report
 generateSummaryReport "./summaryReport"
 if [[ $? -eq 0 ]];then
 	# ENHANCEMENT TASK
