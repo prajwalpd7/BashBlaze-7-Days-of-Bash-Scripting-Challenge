@@ -49,18 +49,16 @@ mysterious_function() {
 	    reverse=$(rev "reversed_temp.txt")
 	    decryption=$(echo "$reverse" | tr 'A-Za-z' 'N-ZA-Mn-za-m')
 	    if [[ $decryption == $(cat $input_file) ]];then
-		    echo "decryption performed successfully"
-		    echo "Decrypted String: $decryption"
-		    echo "Original input: $(cat $input_file)"
+		    # Output will contain same input string
+		    echo $decryption > $output_file
 	    fi
     else
 	    # Total number of encryptions was even, so reversed_temp.txt should contain the original input string
 	    decrypted_string=$(cat "reversed_temp.txt")
 	    original_string=$(cat $input_file)
 	    if [[ $decrypted_string == $original_string ]];then
-		    echo "decryption performed successfully"
-                    echo "Decrypted String: $decrypted_string"
-                    echo "Original input: $original_string"
+		    # Output will contain same input string
+		    echo $decrypted_string > $output_file
 	    fi
     fi
 }
