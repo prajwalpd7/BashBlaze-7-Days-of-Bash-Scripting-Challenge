@@ -1,0 +1,9 @@
+Burger, 120
+Pizza, 250
+Salad, 180
+Soda, 40
+Pasta, 180
+Sandwich, 150
+Coke, 50
+Fries, 100
+Ice Cream, 120
