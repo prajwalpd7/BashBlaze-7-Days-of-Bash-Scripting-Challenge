@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Check if exactly two arguments are provided
+# Check if exactly two arguments are provided otherwise exit
 if [ $# -ne 2 ]; then
     echo "Usage: $0 <directory> <target file>"
     exit 1
