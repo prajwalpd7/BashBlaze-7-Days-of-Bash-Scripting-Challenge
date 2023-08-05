@@ -12,24 +12,24 @@ mysterious_function() {
     local input_file="$1"
     local output_file="$2"
     
-    # 
+    # Encrypt the content of the input file using ROT13 substitution
     tr 'A-Za-z' 'N-ZA-Mn-za-m' < "$input_file" > "$output_file"
 
-    # 
+    # Reverse the encrypted content and save it to a temporary file
     rev "$output_file" > "reversed_temp.txt"
 
-    # 
+    # Generate a random number between 1 and 10
     random_number=$(( ( RANDOM % 10 ) + 1 ))
-
-    # Mystery loop: 
+    
+    # Repeat the following block of operations 'random_number' times
     for (( i=0; i<$random_number; i++ )); do
-        # 
+        # Reverse the content of the previously reversed temporary file
         rev "reversed_temp.txt" > "temp_rev.txt"
 
-        # 
+        # Encrypt the reversed content using ROT13 and save it to a temporary file
         tr 'A-Za-z' 'N-ZA-Mn-za-m' < "temp_rev.txt" > "temp_enc.txt"
 
-        # 
+        # Replace the content of the reversed temporary file with the newly encrypted content
         mv "temp_enc.txt" "reversed_temp.txt"
     done
 
