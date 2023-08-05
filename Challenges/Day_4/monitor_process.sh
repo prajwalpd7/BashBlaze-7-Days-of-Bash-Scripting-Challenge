@@ -9,7 +9,7 @@
 #                                                                                            #
 ##############################################################################################
 #                                                                                            #
-# Execution : sudo ./<script-name> <process-name>    (Recommended to execute with sudo user) #                                       #
+# Execution : sudo ./<script-name> <process-name>    (Recommended to execute with sudo user) #
 #                                                                                            #
 # Example   : sudo ./monitor_process.sh httpd                                                #
 #                                                                                            #
@@ -31,15 +31,26 @@ is_process_running () {
 ########### Start start_process () ###########################################################
 
 start_process () {
-    systemctl start $1 1>/dev/null 2>/dev/null
+    counter=0
 
-    if [ $? -eq 0 ]; then
-        echo "$1 service is running...!"
-    else
-        echo "EROOR: $1 is not running...!"
-    fi
+    while [ $counter -lt 3 ]; do
 
-    systemctl enable $1 1>/dev/null 2>/dev/null
+        systemctl start $1 1>/dev/null 2>/dev/null
+        if [ $? -eq 0 ]; then
+            echo "$1 service is up and running..."
+            systemctl enable $1 1>/dev/null 2>/dev/null
+            exit 0
+        else
+            if [ $counter -eq 2 ]; then
+                echo ""
+                echo "WARNING: We tried 3 times to start the $1 service but could not start, Please check the service name or please manually start it."
+                echo ""
+                exit 1
+            else
+                counter=`expr $counter + 1`
+            fi
+        fi
+    done    
 
 }
 
@@ -61,3 +72,5 @@ else
     echo ""
     head -16 monitor_process.sh
 fi
+
+################# End of script ############################################################
