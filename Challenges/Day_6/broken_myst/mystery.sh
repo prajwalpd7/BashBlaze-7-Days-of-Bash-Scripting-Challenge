@@ -1,5 +1,8 @@
 #!/bin/bash
-# The Mysterious Function
+# Date: 06/08/2023
+# Description: #TWSBashBlazeChallenge Day-6
+# Task, part -1 : Analyzing the Mysterious Function
+
 mysterious_function() {
     local input_file="$1"  # Store the input file path
     local output_file="$2" # Store the output file path
