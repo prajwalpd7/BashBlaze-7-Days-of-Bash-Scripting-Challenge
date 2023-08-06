@@ -1,5 +1,8 @@
 #!/bin/bash
-# This is a bash script that simulates a restaurant ordering system.
+#Author: Yashraj Jaiswal
+# Date: 05/08/2023
+# Description: #TWSBashBlazeChallenge Day-6
+# Task part - 2 : fix the restaurant ordering system script
 
 # Declare associative arrays to store menu item values, ordered quantities, and menu items.
 declare -A menu_item_value
