@@ -16,7 +16,7 @@ Below are the snapshots of the project
 ```
 Created 3 VMs(server, client1 and client2) with the below details.
 
-![image (1)](https://github.com/salvathshaik/BashBlaze-7-Days-of-Bash-Scripting-Challenge/assets/39498166/56cdb8d4-263d-412b-981b-bd6c1e66507c)
+![image (1)](https://github.com/salvathshaik/BashBlaze-7-Days-of-Bash-Scripting-Challenge/assets/39498166/a970a49c-d719-4498-b192-cf2010584116)
 
 
 ![image (2)](https://github.com/salvathshaik/BashBlaze-7-Days-of-Bash-Scripting-Challenge/assets/39498166/6cb80e5f-0cc3-47ed-a259-656dc61a362c)
