@@ -1,56 +1,63 @@
 #!/bin/bash
+#Author: Yashraj Jaiswal
+# Date: 05/08/2023
+# Description: #TWSBashBlazeChallenge Day-5
+# Task : create a log analyzer script
 
-# Check if the user provided the log file path as a command-line argument
-if [ $# -ne 1 ]; then
-    echo "Usage: $0 <path_to_logfile>"
-    exit 1
-fi
+function error_count(){
+    egrep -i -c "ERROR|faliure" $1
+}
 
-# Get the log file path from the command-line argument
-log_file="$1"
+function critical_events(){
+    filename="your_file.txt"
+    pattern="CRITICAL"
+    line_number=1
+    while IFS= read -r line; do
+        if [[ $line == *"$pattern"* ]]; then
+            echo "Line $line_number: $line"
+        fi
+        ((line_number++))
+    done < "$1"
+}
 
-# Check if the log file exists
-if [ ! -f "$log_file" ]; then
-    echo "Error: Log file not found: $log_file"
-    exit 1
-fi
+function top5_error_message(){
+    egrep -i "ERROR|faliure" "$1" | sort | rev | cut -d ' ' -f 3- | rev | uniq -c | sort -r  | head -5
+}
 
-# Step 1: Count the total number of lines in the log file
-total_lines=$(wc -l < "$log_file")
+function generate_summary(){
+    echo "Date of analysis      : $(date +"%D")"
+    echo "Log file name         : $1"
+    echo "Total line processed  : $(wc -l $1 | awk '{print $1}')"
+    echo "Total error count     : $(error_count $1)"
+    echo
+    echo
+    echo "Top 5 error messages:"
+    echo
+    top5_error_message "$1"
+    echo
+    echo
+    echo "List of critical events with line number : "
+    echo
+    critical_events "$1"
+}
 
-# Step 2: Count the number of error messages (identified by the keyword "ERROR" in this example)
-error_count=$(grep -c -i "ERROR" "$log_file")
+function main(){
+    # check if the user has passed any file in command line
+    if (( $# == 0 )); then
+        echo "Info  : this script analyzes a log file and creates a summary out of it."
+        echo "Usage : $0 path-to-file."
+        exit 1
+    fi
+    # check if the given file is empty or not.
+    if [ ! -s "$1" ]; then
+        echo "$1 file is empty"
+        exit 1
+    fi
+    local log_summary_file="log_summary_$(date +"%Y_%m_%d").txt"
+    touch "$log_summary_file"
+    generate_summary "$1" > "$log_summary_file"
+    sudo mv "./$log_summary_file" /var/log
+    echo "Summary report generated: /var/log/$log_summary_file"
+}
 
-# Step 3: Search for critical events (lines containing the keyword "CRITICAL") and store them in an array
-mapfile -t critical_events < <(grep -n -i "CRITICAL" "$log_file")
-
-# Step 4: Identify the top 5 most common error messages and their occurrence count using associative arrays
-declare -A error_messages
-while IFS= read -r line; do
-    # Use awk to extract the error message (fields are space-separated)
-    error_msg=$(awk '{for (i=3; i<=NF; i++) printf $i " "; print ""}' <<< "$line")
-    ((error_messages["$error_msg"]++))
-done < <(grep -i "ERROR" "$log_file")
-
-# Sort the error messages by occurrence count (descending order)
-sorted_error_messages=$(for key in "${!error_messages[@]}"; do
-    echo "${error_messages[$key]} $key"
-done | sort -rn | head -n 5)
-
-# Step 5: Generate the summary report in a separate file
-summary_report="log_summary_$(date +%Y-%m-%d).txt"
-{
-    echo "Date of analysis: $(date)"
-    echo "Log file: $log_file"
-    echo "Total lines processed: $total_lines"
-    echo "Total error count: $error_count"
-    echo -e "\nTop 5 error messages:"
-    echo "$sorted_error_messages"
-    echo -e "\nCritical events with line numbers:"
-    for event in "${critical_events[@]}"; do
-        echo "$event"
-    done
-} > "$summary_report"
-
-echo "Summary report generated: $summary_report"
-
+main "$1"

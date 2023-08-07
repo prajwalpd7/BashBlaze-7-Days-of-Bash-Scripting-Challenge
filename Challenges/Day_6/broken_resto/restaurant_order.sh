@@ -1,57 +1,93 @@
 #!/bin/bash
+#Author: Yashraj Jaiswal
+# Date: 05/08/2023
+# Description: #TWSBashBlazeChallenge Day-6
+# Task part - 2 : fix the restaurant ordering system script
 
-# Function to read and display the menu from menu.txt file
-function display_menu() {
-    echo "Welcome to the Restaurant!"
-    echo "Menu:"
-    # TODO: Read the menu from menu.txt and display item numbers and prices
-    # Format: 1. Burger - ₹120
-    #        2. Pizza - ₹250
-    #        3. Salad - ₹180
-    #        ...
+# Declare associative arrays to store menu item values, ordered quantities, and menu items.
+declare -A menu_item_value
+declare -A item_quantity_ordered
+declare -A menu_items
+
+# Function to read menu items and their values from a file and populate the associative arrays.
+function populate_menu() {
+    local menu_file="./menu.txt"
+    local index=0
+    while IFS=", " read -r menu_item menu_item_value; do
+        menu_items[$index]=$menu_item
+        menu_item_value[$menu_item]=$menu_item_value
+        ((index++))
+    done < "$menu_file"
 }
 
-# Function to calculate the total bill
+# Function to display the menu items and their corresponding values.
+function display_menu() {
+    local index=1
+    for key in "${menu_items[@]}"; do
+        echo -e "$index. $key \t- ₹ ${menu_item_value[$key]}"
+        ((index++))
+    done
+}
+
+# Function to take the customer's order for various menu items.
+function take_order() {
+    local index=1
+    echo "Menu items will appear one at a time. Enter the quantity when prompted."
+    echo "If you don't require an item, just press enter, and we will move to the next item."
+    
+    # take input for every item in the menu
+    for key in "${menu_items[@]}"; do
+        # take input from the customer until a numeric value is added
+        while true; do
+            read -p "$index. $key: " quantity
+            # if input is empty move to next item
+            if [[ -z "$quantity" ]]; then
+                break
+                # add to order only when input is a number
+                elif [[ $quantity =~ ^[0-9]+$ ]]; then
+                item_quantity_ordered["$key"]=$quantity
+                break
+                # for any input other than a number keep prompting the user for a numeric input
+            else
+                # Print an informative message to indicate the user that the input can only be a number.
+                echo "Invalid input, enter quantity in number. Or press enter if item not required."
+                continue
+            fi
+        done
+        ((index++))
+    done
+}
+
+# Function to calculate the total bill based on the ordered quantities and item values.
 function calculate_total_bill() {
     local total=0
-    # TODO: Calculate the total bill based on the customer's order
-    # The order information will be stored in an array "order"
-    # The array format: order[<item_number>] = <quantity>
-    # Prices are available in the same format as the menu display
-    # Example: If the customer ordered 2 Burgers and 1 Salad, the array will be:
-    #          order[1]=2, order[3]=1
-    # The total bill should be the sum of (price * quantity) for each item in the order.
-    # Store the calculated total in the "total" variable.
-    echo "$total"
+    for key in "${menu_items[@]}"; do
+        total=$((total + menu_item_value[$key] * item_quantity_ordered[$key]))
+    done
+    echo $total
 }
 
-# Function to handle invalid user input
-function handle_invalid_input() {
-    echo "Invalid input! Please enter a valid item number and quantity."
+# Main function to execute the restaurant ordering process.
+function main(){
+    echo Welcome to the bash blaze restaurant
+    read -p "What's your name please : " customer_name
+    echo "$customer_name, here is our fantastic menu:"
+    # Show the menu to the customer
+    display_menu
+    echo Ready to order!!
+    # Take the customer's order
+    take_order
+    echo "Enjoy your meal, $customer_name..."
+    echo
+    echo
+    sleep 2
+    echo "Thank you, $customer_name, for dining at our Bash Blaze restaurant."
+    # Generate the bill and present it to the customer
+    echo "Your total bill is: ₹$(calculate_total_bill)"
 }
 
-# Main script
-display_menu
-
-# Ask for the customer's name
-# TODO: Ask the customer for their name and store it in a variable "customer_name"
-
-# Ask for the order
-echo "Please enter the item number and quantity (e.g., 1 2 for two Burgers):"
-read -a input_order
-
-# Process the customer's order
-declare -A order
-for (( i=0; i<${#input_order[@]}; i+=2 )); do
-    item_number="${input_order[i]}"
-    quantity="${input_order[i+1]}"
-    # TODO: Add the item number and quantity to the "order" array
-done
-
-# Calculate the total bill
-total_bill=$(calculate_total_bill)
-
-# Display the total bill with a personalized thank-you message
-# TODO: Display a thank-you message to the customer along with the total bill
-# The message format: "Thank you, <customer_name>! Your total bill is ₹<total_bill>."
+# Populate the menu items and values from the file.
+populate_menu
+# Call the main function to start the ordering process.
+main
 
