@@ -13,7 +13,7 @@ Also handles the symlink creation(which is a major part of nginx reverse proxy) 
 Below are the snapshots of the project
 
 
-```
+
 Created 3 VMs(server, client1 and client2) with the below details.
 
 ![image (1)](https://github.com/salvathshaik/BashBlaze-7-Days-of-Bash-Scripting-Challenge/assets/39498166/a970a49c-d719-4498-b192-cf2010584116)
@@ -41,7 +41,7 @@ Below is the snap while building the docker image.
 
 ![image (7)](https://github.com/salvathshaik/BashBlaze-7-Days-of-Bash-Scripting-Challenge/assets/39498166/b14f8a22-c26d-4a92-97f0-9b8a59c3c783)
 
-```
+
 
 Below are the successful remote command execution.
 
@@ -225,7 +225,7 @@ Completed All tasks.. validate in browser now
 
 ```
 
-```
+
 
 After running the script validating whether application is running in background or not
 
@@ -253,9 +253,3 @@ Validating the application with 1234 port in browser.
 ![image (14)](https://github.com/salvathshaik/BashBlaze-7-Days-of-Bash-Scripting-Challenge/assets/39498166/d0bd94a0-1ec1-42a3-8daf-474e455a122d)
 
 
-```
-
-```
-
-
-```
