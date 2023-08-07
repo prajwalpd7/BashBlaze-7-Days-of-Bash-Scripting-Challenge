@@ -13,24 +13,39 @@ Also handles the symlink creation(which is a major part of nginx reverse proxy) 
 Below are the snapshots of the project
 
 
-```
+
 Created 3 VMs(server, client1 and client2) with the below details.
 
-<3picks>
+![image (1)](https://github.com/salvathshaik/BashBlaze-7-Days-of-Bash-Scripting-Challenge/assets/39498166/a970a49c-d719-4498-b192-cf2010584116)
+
+
+![image (2)](https://github.com/salvathshaik/BashBlaze-7-Days-of-Bash-Scripting-Challenge/assets/39498166/6cb80e5f-0cc3-47ed-a259-656dc61a362c)
+
+
+![image (3)](https://github.com/salvathshaik/BashBlaze-7-Days-of-Bash-Scripting-Challenge/assets/39498166/536c2780-d877-4a0a-842e-e9754a8c218d)
+
 
 And this is the network adapter(bridge adapter) that i have used to communicate with each other VMs.
-<n/w pic>
+
+![image (4)](https://github.com/salvathshaik/BashBlaze-7-Days-of-Bash-Scripting-Challenge/assets/39498166/00bb9164-2b90-4653-b02b-2b610cc67cdf)
 
 
 Copied the SSH files to both the clients.
-<ssh pic>
+
+![image (5)](https://github.com/salvathshaik/BashBlaze-7-Days-of-Bash-Scripting-Challenge/assets/39498166/23c5bf85-84c8-4967-98c1-fafa6682f253)
+
 
 Below is the snap while building the docker image.
 
-Dockerhub validation snapshot
+![image (6)](https://github.com/salvathshaik/BashBlaze-7-Days-of-Bash-Scripting-Challenge/assets/39498166/b34eed5e-fe03-409d-9562-7bd429f9c1d2)
+
+![image (7)](https://github.com/salvathshaik/BashBlaze-7-Days-of-Bash-Scripting-Challenge/assets/39498166/b14f8a22-c26d-4a92-97f0-9b8a59c3c783)
+
+
 
 Below are the successful remote command execution.
 
+```
 <server@server-VirtualBox:~$ cd BashBlaze-7-Days-of-Bash-Scripting-Challenge/Self-solutions/Day_7/
 server@server-VirtualBox:~/BashBlaze-7-Days-of-Bash-Scripting-Challenge/Self-solutions/Day_7$ ./day7_challenge_solution.sh 
 
@@ -208,84 +223,33 @@ Reloaing the nginx configurations to ensure nginx knows about the changes.
 [sudo] password for client1: [sudo] password for client2: 
 Completed All tasks.. validate in browser now
 
-
-web deployment snapshots on nginx
-
-
-on docker
-
-command and image of docker
-
-
-
-
-
-
 ```
 
 
 
-The challenge script mystery.sh has multiple culprits to confuse to understand what this script is doing but when you know the commmands and some important lines then it will be easy to crack the purpose of the file.  it took for while for me to understand new commands like rev, and cipher encrypt technique and how it works and all but at the end i cracked it and modified with fully with lot of enhancemens with performance improvement.
+After running the script validating whether application is running in background or not
 
-The output of the script as follows
+![image (11)](https://github.com/salvathshaik/BashBlaze-7-Days-of-Bash-Scripting-Challenge/assets/39498166/827ed759-a7f5-493b-aac6-779e3b0c1d78)
 
-```
-#checking the content of output file before running the script
+Validating whether we can accessible the application using our vm ip(basically here we are accessing with only ip means it runs with 80 port this happens due to i have used nginx reverse proxy here).
 
-root@ip-172-31-91-38:~/BashBlaze-7-Days-of-Bash-Scripting-Challenge/Self-solutions/Day_6/broken_myst# cat output-file.txt
-Hello World!
+validating in client-1
 
-#running the script with input and output files
+![image (8)](https://github.com/salvathshaik/BashBlaze-7-Days-of-Bash-Scripting-Challenge/assets/39498166/20df1d66-e465-4f25-aa38-1c4c1d00001d)
 
-root@ip-172-31-91-38:~/BashBlaze-7-Days-of-Bash-Scripting-Challenge/Self-solutions/Day_6/broken_myst# ./day6_mystery_challange_solution.sh input-file.txt output-file.txt
+validating in client-2
 
-After 10 times encryption with ROT13 encryption technique on the input file input-file.txt. The output file looks like
-
-Uryyb Jbeyq!
-
-The data looks to be in encrypted format. Do you want to decrypt it (Y/N)? Y
-
-Now the data has been decrypted successfully !!
-Showing the content of file below!!
-
-Hello World!
-
-The mysterious process is complete. Check the 'output-file.txt' for the result!
-
-#verifying the output file content
-
-root@ip-172-31-91-38:~/BashBlaze-7-Days-of-Bash-Scripting-Challenge/Self-solutions/Day_6/broken_myst# cat output-file.txt
-Hello World!
-
-#running again and now see the difference if the random number is ODD
-
-root@ip-172-31-91-38:~/BashBlaze-7-Days-of-Bash-Scripting-Challenge/Self-solutions/Day_6/broken_myst# ./day6_mystery_challange_solution.sh input-file.txt output-file.txt
-
-After 7 times encryption with ROT13 encryption technique on the input file input-file.txt. The output file looks like
-
-Hello World!
-
-Exiting ..
-The mysterious process is complete. Check the 'output-file.txt' for the result!
+![image (12)](https://github.com/salvathshaik/BashBlaze-7-Days-of-Bash-Scripting-Challenge/assets/39498166/14cfe635-2695-4de2-a5ad-39864ec2f898)
 
 
-#Now running again but this time random number will be even number and choose NO to decrypt
+Deploying application on docker manually as VMs are capable to handle as of now.
 
-root@ip-172-31-91-38:~/BashBlaze-7-Days-of-Bash-Scripting-Challenge/Self-solutions/Day_6/broken_myst# ./day6_mystery_challange_solution.sh input-file.txt output-file.txt
+Running the docker image with 1234 port
 
-After 4 times encryption with ROT13 encryption technique on the input file input-file.txt. The output file looks like
+![image (13)](https://github.com/salvathshaik/BashBlaze-7-Days-of-Bash-Scripting-Challenge/assets/39498166/9d2ed8b8-0ee8-41cf-98f0-c14cb1580278)
 
-Uryyb Jbeyq!
+Validating the application with 1234 port in browser.
 
-The data looks to be in encrypted format. Do you want to decrypt it (Y/N)? N
+![image (14)](https://github.com/salvathshaik/BashBlaze-7-Days-of-Bash-Scripting-Challenge/assets/39498166/d0bd94a0-1ec1-42a3-8daf-474e455a122d)
 
-Data is not decrypted !!!
-
-The mysterious process is complete. Check the 'output-file.txt' for the result!
-
-#verifying the output file content now
-
-root@ip-172-31-91-38:~/BashBlaze-7-Days-of-Bash-Scripting-Challenge/Self-solutions/Day_6/broken_myst# cat output-file.txt
-Uryyb Jbeyq!
-
-```
+Thank you
