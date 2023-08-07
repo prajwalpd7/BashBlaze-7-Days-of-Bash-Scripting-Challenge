@@ -1,41 +1,20 @@
-#!/bin/bash
+#!bin/bash/
 
-# Function to display usage information and available options
-function display_usage {
-    echo "Usage: $0 /path/to/source_directory"
-}
+#we will take source path from user and gets stored in $1
+src_path=$1
 
-# Check if a valid directory path is provided as a command-line argument
-if [ $# -eq 0 ] || [ ! -d "$1" ]; then
-    echo "Error: Please provide a valid directory path as a command-line argument."
-    display_usage
-    exit 1
-fi
+#we will store the current date and time in 2 variables
+fname="$(date '+%Y-%m-%d')"
+time="$(date '+%I-%M-%S')"
 
-# Directory path of the source directory to be backed up
-source_dir="$1"
+#storing the name of the backup file in f_name
+f_name=backup_$fname"_"$time.tar.gz
 
-# Function to create a timestamped backup folder
-function create_backup {
-    local timestamp=$(date '+%Y-%m-%d_%H-%M-%S')  # Get the current timestamp
-    local backup_dir="${source_dir}/backup_${timestamp}"
+#this line will zip the files present in $src_path
+tar -czf $f_name $src_path
 
-    # Create the backup folder with the timestamped name
-    mkdir "$backup_dir"
-    echo "Backup created successfully: $backup_dir"
-}
+echo "Backup Created: $PWD/$f_name"
 
-# Function to perform the rotation and keep only the last 3 backups
-function perform_rotation {
-    local backups=($(ls -t "${source_dir}/backup_"* 2>/dev/null))  # List existing backups sorted by timestamp
+#deleting the files except the 3 latest backup files
+rm -f $(ls -1t *.tar.gz | tail -n +4)
 
-    # Check if there are more than 3 backups
-    if [ "${#backups[@]}" -gt 3 ]; then
-        local backups_to_remove="${backups[@]:3}"  # Get backups beyond the last 3
-        rm -rf "${backups_to_remove[@]}"  # Remove the oldest backups
-    fi
-}
-
-# Main script logic
-create_backup
-perform_rotation

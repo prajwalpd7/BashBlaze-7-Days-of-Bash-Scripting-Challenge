@@ -1,0 +1,45 @@
+Date of analysis: 2023-08-04_21-09-57
+Log file name: logs.txt
+Total lines processed: 100
+Total error count: 21
+Top 5 error messages with their occurrence count: 
+      7 Failed to connect 
+      5 Out of memory 
+      4 Invalid input 
+      3 Segmentation fault 
+      2 Disk full 
+List of critical events with line numbers: 
+Line No. 1 : 2023-08-04 21:09:55 [CRITICAL]  - 3929
+Line No. 4 : 2023-08-04 21:09:55 [CRITICAL]  - 27632
+Line No. 6 : 2023-08-04 21:09:55 [CRITICAL]  - 4346
+Line No. 13 : 2023-08-04 21:09:55 [CRITICAL]  - 3052
+Line No. 20 : 2023-08-04 21:09:55 [CRITICAL]  - 11473
+Line No. 22 : 2023-08-04 21:09:55 [CRITICAL]  - 7348
+Line No. 29 : 2023-08-04 21:09:55 [CRITICAL]  - 21130
+Line No. 31 : 2023-08-04 21:09:55 [CRITICAL]  - 32067
+Line No. 38 : 2023-08-04 21:09:55 [CRITICAL]  - 26192
+Line No. 39 : 2023-08-04 21:09:55 [CRITICAL]  - 4691
+Line No. 40 : 2023-08-04 21:09:55 [CRITICAL]  - 5726
+Line No. 41 : 2023-08-04 21:09:55 [CRITICAL]  - 14499
+Line No. 45 : 2023-08-04 21:09:55 [CRITICAL]  - 23122
+Line No. 46 : 2023-08-04 21:09:55 [CRITICAL]  - 28771
+Line No. 48 : 2023-08-04 21:09:55 [CRITICAL]  - 7026
+Line No. 49 : 2023-08-04 21:09:55 [CRITICAL]  - 829
+Line No. 53 : 2023-08-04 21:09:55 [CRITICAL]  - 18492
+Line No. 55 : 2023-08-04 21:09:55 [CRITICAL]  - 12559
+Line No. 56 : 2023-08-04 21:09:55 [CRITICAL]  - 31784
+Line No. 60 : 2023-08-04 21:09:55 [CRITICAL]  - 20400
+Line No. 62 : 2023-08-04 21:09:55 [CRITICAL]  - 29841
+Line No. 64 : 2023-08-04 21:09:55 [CRITICAL]  - 1329
+Line No. 65 : 2023-08-04 21:09:55 [CRITICAL]  - 20636
+Line No. 66 : 2023-08-04 21:09:55 [CRITICAL]  - 25357
+Line No. 68 : 2023-08-04 21:09:55 [CRITICAL]  - 6565
+Line No. 69 : 2023-08-04 21:09:55 [CRITICAL]  - 7359
+Line No. 73 : 2023-08-04 21:09:55 [CRITICAL]  - 18689
+Line No. 74 : 2023-08-04 21:09:55 [CRITICAL]  - 3470
+Line No. 83 : 2023-08-04 21:09:55 [CRITICAL]  - 15655
+Line No. 85 : 2023-08-04 21:09:55 [CRITICAL]  - 8297
+Line No. 86 : 2023-08-04 21:09:55 [CRITICAL]  - 21109
+Line No. 87 : 2023-08-04 21:09:55 [CRITICAL]  - 22747
+Line No. 91 : 2023-08-04 21:09:55 [CRITICAL]  - 6292
+Line No. 100 : 2023-08-04 21:09:55 [CRITICAL]  - 10707
