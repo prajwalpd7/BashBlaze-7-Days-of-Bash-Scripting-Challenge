@@ -29,6 +29,6 @@ echo "6. My hostname - $HOSTNAME"  # Completed task 5 Using Built-in Variables
 
 echo "Files with .txt  to list all the files with a specific extension in a directory"
 ls *.txt
-ls *.sh  # completed task 6 Wildcards
+ls *.sh  # completed task 6 Wildcardss
 
 
