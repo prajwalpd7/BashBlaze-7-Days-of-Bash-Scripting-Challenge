@@ -4,25 +4,37 @@
 function display_menu() {
     echo "Welcome to the Restaurant!"
     echo "Menu:"
-    # Read the menu from menu.txt and display item numbers and prices
+    
+    local menu_file="menu.txt"
     local item_number=1
-    while IFS= read -r line; do
-        name="$(echo "$line" | cut -d',' -f1)"
-        price="$(echo "$line" | cut -d',' -f2)"
-        echo "$item_number. $name - ₹$price"
+    
+    # Read and display menu items and prices from menu.txt
+    while IFS=',' read -r item price; do
+        echo "$item_number. $item - ₹$price"
         ((item_number++))
-    done < "menu.txt"
+    done < "$menu_file"
 }
 
 # Function to calculate the total bill
 function calculate_total_bill() {
     local total=0
-    # Calculate the total bill based on the customer's order
+    local menu_file="menu.txt"
+
+    # Create an associative array to store menu item prices
+    declare -A item_prices
+    while IFS=',' read -r item price; do
+        item_prices["$item_number"]=${price//[^0-9]/}
+        ((item_number++))
+    done < "$menu_file"
+
+    # Calculate the total bill based on the order
     for item_number in "${!order[@]}"; do
-        price=$(sed -n "${item_number}p" "menu.txt" | cut -d',' -f2)
-        quantity="${order[$item_number]}"
-        ((total += price * quantity))
+        quantity=${order["$item_number"]}
+        price=${item_prices["$item_number"]}
+        subtotal=$((price * quantity))
+        total=$((total + subtotal))
     done
+
     echo "$total"
 }
 
@@ -47,12 +59,7 @@ declare -A order
 for (( i=0; i<${#input_order[@]}; i+=2 )); do
     item_number="${input_order[i]}"
     quantity="${input_order[i+1]}"
-    if [[ $item_number =~ ^[0-9]+$ && $quantity =~ ^[0-9]+$ ]]; then
-        order["$item_number"]="$quantity"
-    else
-        handle_invalid_input
-        exit 1
-    fi
+    order["$item_number"]=$quantity
 done
 
 # Calculate the total bill

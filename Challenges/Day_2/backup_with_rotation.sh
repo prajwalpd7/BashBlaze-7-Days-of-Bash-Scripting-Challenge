@@ -1,5 +1,6 @@
 #!/bin/bash
 
+<<<<<<< HEAD
 # Function to display usage information and available options
 function display_usage {
     echo "Usage: $0 /path/to/source_directory"
@@ -39,3 +40,36 @@ function perform_rotation {
 # Main script logic
 create_backup
 perform_rotation
+=======
+# Check if a directory path is provided as a command-line argument
+# checks if the number of command-line arguments is not equal to 1
+if [ $# -ne 1 ]
+ then
+    echo "Usage: $0 <directory_path>"
+    exit 1
+fi
+
+# Validate if the provided argument is a directory
+backup_source="$1"
+# The -d test operator checks if the given path exists and is a directory
+if [ ! -d "$backup_source" ]
+ then
+    echo "Error: The provided path is not a valid directory."
+    exit 1
+fi
+
+# Create a timestamp for the backup folder
+backup_time=$(date +"%Y-%m-%d_%H-%M-%S")
+backup_folder="${backup_source}/backup_${backup_time}"
+
+# Perform the backup
+# rsync is a powerful file copying tool
+rsync -Rr "$backup_source" "$backup_folder" || {echo "Error: Backup failed." exit 1}
+
+# Perform rotation to keep only the last 3 backups
+# here we list the folders in reverse chronological order and remove the older backups
+ls -dt "${backup_source}/backup_"* | tail -n +4 | xargs rm -rf
+
+# Provide feedback to the user
+echo "Backup created: $backup_folder."
+>>>>>>> a790195 (day02 Solution added)
